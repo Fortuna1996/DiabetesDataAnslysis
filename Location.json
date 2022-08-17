@@ -972,7 +972,13 @@
               {
                 "data": {
                   "id": "South Africa"
-                }
+                },
+                "children": [
+                    {"data":{"id": "De Villiers"}}, 
+                    {"data":{"id": "Honest"}},
+                    {"data":{"id": "organicfair"}}
+       
+                ]
               },
               {
                 "data": {
