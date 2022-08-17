@@ -774,7 +774,10 @@
               {
                 "data": {
                   "id": "Ghana"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Omanhene"}}
+                ]
               },
               {
                 "data": {
