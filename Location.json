@@ -1684,9 +1684,18 @@
               },
               {
                 "data": {
-                  "id": "Venezuela (Bolivarian Republic of)"
+                  "id": "Venezuela"
+                },
+                  "children": [
+                      {"data":{"id": "Bitacora"}},
+                      {"data":{"id": "Cacao de Origen"}},
+                      {"data":{"id": "El Rey"}},
+                      {"data":{"id": "Franceschi"}},
+                      {"data":{"id": "Suruca Chocolate"}}
+
+                  ]
                 }
-              }
+              
             ]
           },
           {
