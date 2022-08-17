@@ -256,7 +256,19 @@
               {
                 "data": {
                   "id": "Japan"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Cacao Store"}},
+                    {"data":{"id": "Emily's"}},
+                    {"data":{"id": "Green Bean to Bar"}},
+                    {"data":{"id": "Milton"}},
+                    {"data":{"id": "Musee du Chocolat Theobroma"}},
+                    {"data":{"id": "Palet D'Or"}},
+                    {"data":{"id": "Sweet Escalier"}},
+                    {"data":{"id": "Tablette (aka Vanillabeans)"}},
+                    {"data":{"id": "Theobroma"}}
+                
+                ]
               },
               {
                 "data": {
