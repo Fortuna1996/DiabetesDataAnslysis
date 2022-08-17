@@ -406,7 +406,22 @@
               {
                 "data": {
                   "id": "Belgium"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Belcolade"}}, 
+                    {"data":{"id": "Benoit Nihant"}}, 
+                    {"data":{"id": "Chocolatoa"}},
+                    {"data":{"id": "Darcis"}}, 
+                    {"data":{"id": "Dolfin (Belcolade)"}},
+                    {"data":{"id": "Frederic Blondeel"}},
+                    {"data":{"id": "Legast"}},
+                    {"data":{"id": "Mike & Becky"}},
+                    {"data":{"id": "Millesime"}},
+                    {"data":{"id": "Neuhaus (Callebaut)"}},
+                    {"data":{"id": "Pierre Marcolini"}},
+                    {"data":{"id": "Zoto (Chocolatoa)"}}
+              
+                ]
               },
               {
                 "data": {
