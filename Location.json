@@ -266,8 +266,16 @@
               },
               {
                 "data": {
-                  "id": "Democratic People's Republic of Korea"
-                }
+                  "id": "South Korea"
+                },
+                    "children": [
+                        {"data":{"id": "By Cacao"}}, 
+                        {"data":{"id": "Choco Dong"}},
+                        {"data":{"id": "Public Chocolatory"}},
+                        {"data":{"id": "Roasting Masters"}},
+                        {"data":{"id": "Tree to Bar"}}
+       
+                    ]
               },
               {
                 "data": {
