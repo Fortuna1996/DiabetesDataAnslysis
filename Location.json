@@ -587,7 +587,12 @@
               {
                 "data": {
                   "id": "Poland"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Manufaktura Czekolady"}}
+    
+
+                ]
               },
               {
                 "data": {
