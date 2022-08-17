@@ -1367,7 +1367,14 @@
               {
                 "data": {
                   "id": "Puerto Rico"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Cacao Arabuco"}},
+                    {"data":{"id": "Forteza (Cortes)"}},
+                    {"data":{"id": "Loiza"}}
+
+
+                ]
               },
               {
                 "data": {
