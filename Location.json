@@ -1276,7 +1276,16 @@
               {
                 "data": {
                   "id": "Colombia"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Cacao Hunters"}},
+                    {"data":{"id": "Carlotta Chocolat"}},
+                    {"data":{"id": "Luker"}},
+                    {"data":{"id": "Manifesto Cacao"}},
+                    {"data":{"id": "Santander (Compania Nacional)"}},
+                    {"data":{"id": "Tibito"}}
+
+                ]
               },
               {
                 "data": {
