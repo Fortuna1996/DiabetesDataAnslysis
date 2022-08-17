@@ -522,7 +522,13 @@
               {
                 "data": {
                   "id": "Hungary"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Chococard (Lapos)"}},
+                    {"data":{"id": "Rozsavolgyi"}},
+                    {"data":{"id": "Szanto Tibor"}}
+                   
+                ]
               },
               {
                 "data": {
