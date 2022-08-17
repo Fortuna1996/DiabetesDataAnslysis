@@ -1134,7 +1134,17 @@
               {
                 "data": {
                   "id": "New Zealand"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Captain Pembleton"}},
+                    {"data":{"id": "Foundry"}},
+                    {"data":{"id": "Hogarth"}},
+                    {"data":{"id": "Ocho"}},
+                    {"data":{"id": "Solomons Gold"}},
+                    {"data":{"id": "Wellington Chocolate Factory"}}
+        
+
+                ]
               }
             ]
           },
