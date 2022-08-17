@@ -352,7 +352,19 @@
               {
                 "data": {
                   "id": "Italy"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Amedei"}},
+                    {"data":{"id": "C-Amaro"}},
+                    {"data":{"id": "Domori"}},
+                    {"data":{"id": "Guido Castagna"}},
+                    {"data":{"id": "Maglio"}},
+                    {"data":{"id": "Pura Delizia"}},
+                    {"data":{"id": "Ruket"}},
+                    {"data":{"id": "Silvio Bessone"}},
+                    {"data":{"id": "Urzi"}}
+                    
+                ]
               },
               {
                 "data": {
