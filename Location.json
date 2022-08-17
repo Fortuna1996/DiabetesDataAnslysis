@@ -1389,7 +1389,39 @@
               {
                 "data": {
                   "id": "Canada"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Ambrosia"}},
+                    {"data":{"id": "Cacao 70"}},
+                    {"data":{"id": "Chaleur B"}},
+                    {"data":{"id": "Chocolats Privilege"}},
+                    {"data":{"id": "Choklat"}},
+                    {"data":{"id": "Choocsol"}},
+                    {"data":{"id": "Coco"}},
+                    {"data":{"id": "Desbarres"}},
+                    {"data":{"id": "East Van Roasters"}},
+                    {"data":{"id": "Eau de Rose"}},
+                    {"data":{"id": "Finnia"}},
+                    {"data":{"id": "Habitual"}},
+                    {"data":{"id": "Hummingbird"}},
+                    {"data":{"id": "Kin + Pod"}},
+                    {"data":{"id": "Marigold's Finest"}},
+                    {"data":{"id": "McGuire"}},
+                    {"data":{"id": "Monarque"}},
+                    {"data":{"id": "Olivia"}},
+                    {"data":{"id": "organicfair"}},
+                    {"data":{"id": "Palette de Bine"}},
+                    {"data":{"id": "Petite Patrie"}},
+                    {"data":{"id": "Qantu"}},
+                    {"data":{"id": "Sirene"}},
+                    {"data":{"id": "Soma"}},
+                    {"data":{"id": "Soul"}},
+                    {"data":{"id": "Sweetness"}},
+                    {"data":{"id": "Tribe"}},
+                    {"data":{"id": "Uncouth"}},
+                    {"data":{"id": "Vaka"}}
+
+            ]
               },
               {
                 "data": {
