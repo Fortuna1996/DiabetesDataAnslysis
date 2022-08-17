@@ -1243,7 +1243,10 @@
               {
                 "data": {
                   "id": "Bolivia (Plurinational State of)"
-                }
+                },
+                "children": [
+                    {"data":{"id": "El Ceibo"}}
+                ]
               },
               {
                 "data": {
