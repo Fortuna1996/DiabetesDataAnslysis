@@ -1223,7 +1223,10 @@
               {
                 "data": {
                   "id": "Grenada"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Grenada Chocolate Co."}}
+                ]
               },
               {
                 "data": {
