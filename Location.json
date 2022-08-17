@@ -1268,7 +1268,10 @@
               {
                 "data": {
                   "id": "Chile"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Obolo"}}
+                ]
               },
               {
                 "data": {
