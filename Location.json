@@ -1309,7 +1309,23 @@
               {
                 "data": {
                   "id": "Ecuador"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Aequare (Gianduja)"}},
+                    {"data":{"id": "Bouga Cacao (Tulicorp)"}},
+                    {"data":{"id": "Cacaoyere (Ecuatoriana)"}},
+                    {"data":{"id": "Caoni (Tulicorp)"}},
+                    {"data":{"id": "Chchukululu (Tulicorp)"}},
+                    {"data":{"id": "Hacienda El Castillo"}},
+                    {"data":{"id": "Hoja Verde (Tulicorp)"}},
+                    {"data":{"id": "Kallari (Ecuatoriana)"}},
+                    {"data":{"id": "Nikoa"}},
+                    {"data":{"id": "Pacari"}},
+                    {"data":{"id": "Republica del Cacao (aka Confecta)"}},
+                    {"data":{"id": "San Jose"}},
+                    {"data":{"id": "To'ak (Ecuatoriana)"}}
+
+                ]
               },
               {
                 "data": {
