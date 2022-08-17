@@ -557,7 +557,12 @@
               {
                 "data": {
                   "id": "Finland"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Levy"}},
+                    {"data":{"id": "Lilla"}}
+
+                ]
               },
               {
                 "data": {
