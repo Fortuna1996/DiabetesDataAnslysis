@@ -1347,7 +1347,13 @@
               {
                 "data": {
                   "id": "Costa Rica"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Caribeans"}},
+                    {"data":{"id": "Nahua"}},
+                    {"data":{"id": "Sibu"}}
+                    
+                ]
               },
               {
                 "data": {
