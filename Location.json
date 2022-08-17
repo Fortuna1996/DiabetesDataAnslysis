@@ -453,7 +453,19 @@
               {
                 "data": {
                   "id": "Germany"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Belyzium"}},
+                    {"data":{"id": "Choco Del Sol"}},
+                    {"data":{"id": "Coppeneur"}},
+                    {"data":{"id": "Edelmond"}},
+                    {"data":{"id": "Georgia Ramon"}},
+                    {"data":{"id": "Hachez"}},
+                    {"data":{"id": "Heilemann"}},
+                    {"data":{"id": "Meybol"}},
+                    {"data":{"id": "Oialla by Bojessen (Malmo)"}},
+                    {"data":{"id": "Timo A. Meyer"}}
+                ]
               },
               {
                 "data": {
