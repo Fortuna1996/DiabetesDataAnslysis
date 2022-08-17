@@ -1251,7 +1251,19 @@
               {
                 "data": {
                   "id": "Brazil"
-                }
+                },
+                "children": [
+                    {"data":{"id": "AMMA"}},
+                    {"data":{"id": "Baiani"}},
+                    {"data":{"id": "Casa Lasevicius"}},
+                    {"data":{"id": "De Mendes"}},
+                    {"data":{"id": "Luisa Abram"}},
+                    {"data":{"id": "Mestico"}},
+                    {"data":{"id": "Mission"}},
+                    {"data":{"id": "Nugali"}},
+                    {"data":{"id": "Q Chocolate"}}
+
+                ]
               },
               {
                 "data": {
