@@ -746,7 +746,14 @@
               {
                 "data": {
                   "id": "Sweden"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Malmo"}},
+                    {"data":{"id": "Metiisto"}},
+                    {"data":{"id": "Svenska Kakaobolaget"}},
+                    {"data":{"id": "The Barn"}}
+
+                ]
               },
               {
                 "data": {
