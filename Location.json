@@ -426,7 +426,29 @@
               {
                 "data": {
                   "id": "France"
-                }
+                },
+                "children": [
+                    {"data":{"id": "A. Morin"}},
+                    {"data":{"id": "Alain Ducasse"}},
+                    {"data":{"id": "Ara"}},
+                    {"data":{"id": "Bernachon"}},
+                    {"data":{"id": "Bonnat"}},
+                    {"data":{"id": "Cacao Barry"}},
+                    {"data":{"id": "Chapon"}},
+                    {"data":{"id": "Debauve & Gallais (Michel Cluizel)"}},
+                    {"data":{"id": "Encuentro"}},
+                    {"data":{"id": "Erithaj (A. Morin)"}},
+                    {"data":{"id": "La Feverie (Hasnaa)"}},
+                    {"data":{"id": "La Maison du Chocolat (Valrhona)"}},
+                    {"data":{"id": "Laia aka Chat-Noir"}},
+                    {"data":{"id": "Michel Cluizel"}},
+                    {"data":{"id": "Pralus"}},
+                    {"data":{"id": "Raoul Boulanger"}},
+                    {"data":{"id": "Santome"}},
+                    {"data":{"id": "Valrhona"}},
+                    {"data":{"id": "Vietcacao (A. Morin)"}}
+
+                ]
               },
               {
                 "data": {
