@@ -572,7 +572,20 @@
               {
                 "data": {
                   "id": "Switzerland"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Akesson's (Pralus)"}},
+                    {"data":{"id": "Beschle (Felchlin)"}},
+                    {"data":{"id": "Cacao Betulia"}},
+                    {"data":{"id": "Felchlin"}},
+                    {"data":{"id": "Idilio (Felchlin)"}},
+                    {"data":{"id": "Lindt & Sprunglin"}},
+                    {"data":{"id": "Original Beans (Felchlin)"}},
+                    {"data":{"id": "Sprungli (Felchlin)"}},
+                    {"data":{"id": "Stella (aka Bernrain)"}},
+                    {"data":{"id": "Taucherli"}}
+
+                ]
               }
             ]
           },
