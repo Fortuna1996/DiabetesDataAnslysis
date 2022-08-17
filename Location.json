@@ -693,7 +693,12 @@
               {
                 "data": {
                   "id": "Norway"
-                }
+                },
+                "children": [
+                    {"data":{"id": "FJAK"}}
+                
+
+                ]
               },
               {
                 "data": {
