@@ -209,7 +209,13 @@
               {
                 "data": {
                   "id": "Philippines"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Auro"}},
+                    {"data":{"id": "Malagos"}}
+        
+
+                ]
               },
               {
                 "data": {
