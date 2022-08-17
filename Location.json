@@ -611,8 +611,12 @@
               },
               {
                 "data": {
-                  "id": "Russian Federation"
-                }
+                  "id": "Russia"
+                },
+                "children": [
+                    {"data":{"id": "Britarev"}}
+
+                ]
               },
               {
                 "data": {
