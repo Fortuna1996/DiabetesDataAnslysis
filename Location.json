@@ -973,7 +973,19 @@
               {
                 "data": {
                   "id": "Australia"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Atypic"}}, 
+                    {"data":{"id": "Bahen & Co."}}, 
+                    {"data":{"id": "Bright"}}, 
+                    {"data":{"id": "Cravve"}}, 
+                    {"data":{"id": "Daintree"}}, 
+                    {"data":{"id": "Matale"}}, 
+                    {"data":{"id": "Metiisto"}}, 
+                    {"data":{"id": "Smooth Chocolator, The"}}, 
+                    {"data":{"id": "Spencer"}}, 
+                    {"data":{"id": "Zokoko"}}
+                ]
               },
               {
                 "data": {
