@@ -1494,7 +1494,22 @@
               {
                 "data": {
                   "id": "Peru"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Amazona"}},
+                    {"data":{"id": "Bakau"}},
+                    {"data":{"id": "Cacaosuyo"}},
+                    {"data":{"id": "Cacaosuyo (Theobroma Inversiones)"}},
+                    {"data":{"id": "Christophe Toury"}},
+                    {"data":{"id": "Marana"}},
+                    {"data":{"id": "Nina"}},
+                    {"data":{"id": "Orquidea"}},
+                    {"data":{"id": "Pascha"}},
+                    {"data":{"id": "Shattell"}},
+                    {"data":{"id": "Tribar"}}
+            
+
+                ]
               },
               {
                 "data": {
