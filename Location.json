@@ -440,7 +440,17 @@
               {
                 "data": {
                   "id": "Spain"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Amatller (Simon Coll)"}}, 
+                    {"data":{"id": "Blanxart"}},
+                    {"data":{"id": "Cacao Sampaka"}},
+                    {"data":{"id": "Chocovic"}},
+                    {"data":{"id": "Kaitxo"}},
+                    {"data":{"id": "Pangea"}},
+                    {"data":{"id": "Utopick"}}
+
+                ]
               },
               {
                 "data": {
