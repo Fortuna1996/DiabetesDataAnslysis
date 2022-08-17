@@ -958,7 +958,15 @@
               {
                 "data": {
                   "id": "Madagascar"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Madecasse (Cinagra)"}},
+                    {"data":{"id": "Malagasy (Chocolaterie Robert)"}},
+                    {"data":{"id": "Menakao (aka Cinagra)"}},
+                    {"data":{"id": "Robert (aka Chocolaterie Robert)"}},
+                    {"data":{"id": "Vao Vao (Chocolaterie Robert)"}}
+                
+                ]
               },
               {
                 "data": {
