@@ -793,7 +793,37 @@
               {
                 "data": {
                   "id": "United Kingdom"
-                }
+                },
+                "children": [
+                    {"data":{"id": "Artisan du Chocolat"}},
+                    {"data":{"id": "Artisan du Chocolat (Casa Luker)"}},
+                    {"data":{"id": "Bean"}},
+                    {"data":{"id": "Beau Cacao"}},
+                    {"data":{"id": "Black River (A. Morin)"}},
+                    {"data":{"id": "Bullion"}},
+                    {"data":{"id": "Chocablog"}},
+                    {"data":{"id": "Chocolarder"}},
+                    {"data":{"id": "Damson"}},
+                    {"data":{"id": "Doble & Bignall"}},
+                    {"data":{"id": "Dormouse"}},
+                    {"data":{"id": "Duffy's"}},
+                    {"data":{"id": "Firetree"}},
+                    {"data":{"id": "Forever Cacao"}},
+                    {"data":{"id": "Green & Black's (ICAM)"}},
+                    {"data":{"id": "Harris & James"}},
+                    {"data":{"id": "Hotel Chocolat"}},
+                    {"data":{"id": "Hotel Chocolat (Coppeneur)"}},
+                    {"data":{"id": "Land"}},
+                    {"data":{"id": "Paul Young"}},
+                    {"data":{"id": "Pump Street Bakery"}},
+                    {"data":{"id": "Seaforth"}},
+                    {"data":{"id": "Solkiki"}},
+                    {"data":{"id": "Tosier"}},
+                    {"data":{"id": "Willie's Cacao"}}
+                    
+            
+                ]
+                
               },
               {
                 "data": {
