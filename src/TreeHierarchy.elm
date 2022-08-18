@@ -52,7 +52,7 @@ subscriptions model =
 init : () -> ( Model, Cmd Msg )
 init () =
     ( { tree = Tree.singleton "", errorMsg = "Loading ..." }
-    , Http.get { url = "data/countryHierarchy.json", expect = Http.expectJson GotFlare treeDecoder1 }
+    , Http.get { url = "https://raw.githubusercontent.com/Fortuna1996/ChocolateBarVisualization/main/Location.json", expect = Http.expectJson GotFlare treeDecoder1 }
     )
 
 view : Model -> Html msg
