@@ -1,4 +1,4 @@
-module Uebungsaufgabe9_3 exposing (main)
+module TreeHierarchy exposing (main)
 
 import Color
 import Dict
