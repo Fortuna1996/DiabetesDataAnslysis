@@ -1,4 +1,4 @@
-=,ref,company,company_location,review_date,country_of_bean_origin,specific_bean_origin_or_bar_name,cocoa_percent,rating,counts_of_ingredients,beans,cocoa_butter,vanilla,lecithin,salt,sugar,sweetener_without_sugar,first_taste,second_taste,third_taste,fourth_taste
+index,ref,company,company_location,review_date,country_of_bean_origin,specific_bean_origin_or_bar_name,cocoa_percent,rating,counts_of_ingredients,beans,cocoa_butter,vanilla,lecithin,salt,sugar,sweetener_without_sugar,first_taste,second_taste,third_taste,fourth_taste
 0,2454,5150,United States of America,2019,Madagascar,"Bejofo Estate, batch 1",76.0,3.75,3,1,1,0,0,0,1,0,cocoa,blackberry,full body,
 1,2458,5150,United States of America,2019,Dominican republic,"Zorzal, batch 1",76.0,3.5,3,1,1,0,0,0,1,0,cocoa,vegetal,savory,
 2,2454,5150,United States of America,2019,Tanzania,"Kokoa Kamili, batch 1",76.0,3.25,3,1,1,0,0,0,1,0,rich cocoa,fatty,bready,
