@@ -525,7 +525,7 @@ index,ref,company,company_location,review_date,country_of_bean_origin,specific_b
 523,486,Chuao Chocolatier (Pralus),United States of America,2010,Venezuela,Chuao,77,"2,75",3,1,1,0,0,0,1,0,red berry,bitter,roasty,sour
 524,227,Claudio Corallo,Sao tome & principe,2008,Blend,"Terreiro Velho P., Sao Tome & Principe",75,"3,75",3,1,1,0,0,0,1,0,dry,sandy,cocoa,coffee
 525,209,Claudio Corallo,Sao tome & principe,2008,Blend,Terreiro Velho P. w/ sugar crystals,80,3,3,1,1,0,0,0,1,0,bitter,light lime,sour,
-526,470,Claudio Corallo,Sao tome & principe,2010,Blend,"Terreiro Velho P., Sao Tome & Principe","73,5","3,75",2,1,0,0,0,0,1,0,short,mild cocoa,mild fruit,
+,,,,,,,,,,,,,,,,,,,,
 527,1486,Cloudforest,United States of America,2015,Ecuador,"Camino Verde P., Balao, Guayas, 2014, batch 1",73,"3,5",2,1,0,0,0,0,1,0,creamy,floral,bourbon,
 528,2474,Coco,Canada,2020,Peru,Ucayali,70,"3,5",3,1,1,0,0,0,1,0,balanced,anise,creamy,
 529,2402,Cocoa Carib,St. lucia,2019,St. lucia,St. Lucia,70,"2,25",4,1,1,1,0,0,1,0,raw,dirty,metallic,dry
@@ -689,7 +689,7 @@ index,ref,company,company_location,review_date,country_of_bean_origin,specific_b
 687,1880,Dormouse,United Kingdom,2016,Grenada,Non Pariel Estate,75,"2,75",3,1,1,0,0,0,0,1,licorice,molasses,rubber,
 688,2052,Dormouse,United Kingdom,2018,Guatemala,"Verapaz, batch 254",72,"3,5",3,1,1,0,0,0,0,1,near perfect shine,cocoa,,
 689,2096,Dormouse,United Kingdom,2018,Peru,"Piura, batch 274",80,"3,5",2,1,0,0,0,0,0,1,molasses,fruit,,
-690,2052,Dormouse,United Kingdom,2018,Philippines,"Kablon Farm, batch 242","71,5","2,75",3,1,1,0,0,0,0,1,molasses notes from sugar,,,
+,,,,,,,,,,,,,,,,,,,,
 691,2390,Double Spiral,United States of America,2019,Dominican republic,Hispaniola,75,3,2,1,0,0,0,0,1,0,dry,cocoa,grassy,spicy
 692,2390,Double Spiral,United States of America,2019,Tanzania,Kokoa Kamili,70,"2,75",2,1,0,0,0,0,1,0,dry,sour,sweet,mild fruit
 693,2390,Double Spiral,United States of America,2019,Dominican republic,Oko Caribe,75,"2,5",2,1,0,0,0,0,1,0,dry,earthy,walnut,
@@ -731,7 +731,7 @@ index,ref,company,company_location,review_date,country_of_bean_origin,specific_b
 729,206,El Rey,Venezuela,2008,Venezuela,"Carenero Superior, Apamate",74,"2,5",5,1,1,1,1,0,1,0,sandy,banana,sour,
 730,206,El Rey,Venezuela,2008,Venezuela,"Carenero Superior, Bucare",58,"2,5",5,1,1,1,1,0,1,0,gritty,sweet,banana,smoke
 731,439,El Rey,Venezuela,2009,Venezuela,"Rio Caribe, Macuro",70,3,5,1,1,1,1,0,1,0,sandy,bold,cherry,peanut butter
-732,439,El Rey,Venezuela,2009,Venezuela,"Rio Caribe, Cariaco","60,5","2,75",5,1,1,1,1,0,1,0,very sweet,marshmallow,,
+,,,,,,,,,,,,,,,,,,,,
 733,1662,El Rey,Venezuela,2015,Venezuela,San Joaquin,70,"3,75",5,1,1,1,1,0,1,0,spicy,caramel,vanilla,
 734,2382,Eldora,United States of America,2019,Guatemala,"Polochic, batch 711",70,"3,5",3,1,1,0,0,0,1,0,cocoa,fig notes,,
 735,1137,Emerald Estate,St. lucia,2013,St. lucia,Emerald Estate,70,"3,25",2,1,0,0,0,0,1,0,sandy,tannic,earthy,
@@ -1115,7 +1115,7 @@ index,ref,company,company_location,review_date,country_of_bean_origin,specific_b
 1113,1069,Kah Kow,Dominican republic,2013,Dominican republic,"Rizek Cacao, Domin. Rep.",82,3,5,1,1,1,1,0,1,0,nutty,sour milk,off note,
 1114,2422,Kah Kow - USA,Dominican republic,2019,Dominican republic,"Dominican Nacional, Collection 01",68,"3,75",4,1,1,0,1,0,1,0,creamy,floral,dried fruit,
 1115,2454,Kah Kow - USA,United States of America,2019,Dominican republic,"Los Bejucos, Collection 01, Rizek",65,"3,75",4,1,1,0,1,0,1,0,creamy,distinct,dried fruit,
-1116,2390,Kah Kow - USA,Dominican republic,2019,Dominican republic,Mata Larga,"71,5","3,5",3,1,1,0,0,0,1,0,creamy,balanced,fig,cocoa
+,,,,,,,,,,,,,,,,,,,,
 1117,2394,Kah Kow - USA,Dominican republic,2019,Dominican republic,El Antiguo (Monet Plata & Duarte ),70,3,3,1,1,0,0,0,1,0,sandy,sweet,acidic,
 1118,2454,Kah Kow - USA,United States of America,2019,Dominican republic,"El Valle, Collection 01, Rizek",72,3,4,1,1,0,1,0,1,0,creamy,black tea,vegetal,
 1119,2334,Kaitxo,Spain,2019,Tanzania,"Morogoro, Kamili, Kilombero Valley, batch 13",75,"3,25",3,1,1,0,0,0,1,0,base cocoa,fruit,fatty,
@@ -1152,10 +1152,10 @@ index,ref,company,company_location,review_date,country_of_bean_origin,specific_b
 1150,1852,K'ul,United States of America,2016,Ecuador,"Los Rios, Hacienda Limon, Heirloom",70,"3,75",4,1,1,0,1,0,1,0,oranges,,,
 1151,1840,K'ul,United States of America,2016,Haiti,"Kafupbo, Petit Bourg, De Borgnes",70,"3,25",4,1,1,0,1,0,1,0,spicy,vanilla,dairy,
 1152,1852,K'ul,United States of America,2016,Peru,"Maranon, Fortunato No. 4",70,"2,75",4,1,1,0,1,0,1,0,astringent,unbalanced,off,
-1153,1359,Kyya,United States of America,2014,Dominican republic,Hispaniola,"72,5",3,5,1,1,1,0,1,1,0,vanilla,candy-like,sour milk,
-1154,1363,Kyya,United States of America,2014,Madagascar,Madagascar,"72,5",3,5,1,1,1,0,1,1,0,mild vanilla and mild fruit,,,
-1155,1359,Kyya,United States of America,2014,Uganda,Uganda,"72,5","2,5",5,1,1,1,0,1,1,0,vanilla,earth,cardboard,
-1156,1363,Kyya,United States of America,2014,Ecuador,Ecuador,"72,5","2,5",5,1,1,1,0,1,1,0,intense,bourbon,vanilla,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
 1157,431,L.A. Burdick (Felchlin),United States of America,2009,Madagascar,Madagascar,64,"3,5",5,1,1,1,1,0,1,0,smooth,rich,lemon,
 1158,451,L.A. Burdick (Felchlin),United States of America,2009,Bolivia,Bolivian,68,3,5,1,1,1,1,0,1,0,rich,spice,cheese,
 1159,576,L.A. Burdick (Felchlin),United States of America,2010,Dominican republic,Dominican Republic,74,"3,75",5,1,1,1,1,0,1,0,simple,rich hot cocoa,,
@@ -1472,7 +1472,7 @@ index,ref,company,company_location,review_date,country_of_bean_origin,specific_b
 1470,2458,Naive,Lithuania,2019,Nicaragua,"Rugoso, nanolot for Cacao Review",67,"2,75",3,1,1,0,0,0,1,0,strong,rubbery,woody,sweet
 1471,1403,Nathan Miller,United States of America,2014,Ghana,Ghana,70,"3,5",3,1,1,0,0,0,1,0,brownie,toffee,,
 1472,1403,Nathan Miller,United States of America,2014,Dominican republic,Hispaniola,70,"2,5",2,1,0,0,0,0,0,1,grassy,dirt,mild spice,
-1473,1403,Nathan Miller,United States of America,2014,Madagascar,Madagascar,"73,5","2,5",2,1,0,0,0,0,1,0,intense,pungent,sour fruit,
+,,,,,,,,,,,,,,,,,,,,
 1474,1403,Nathan Miller,United States of America,2014,Peru,Peru,72,"2,25",2,1,0,0,0,0,1,0,metallic,medicinal,pungent,
 1475,2060,Nearynogs,Ireland,2018,Dominican republic,"Hispaniola, batch 170308",70,"3,25",2,1,0,0,0,0,1,0,dry,sandy,sweet,acidic
 1476,24,Neuhaus (Callebaut),Belgium,2006,Venezuela,Ocumare,71,3,5,1,1,1,1,0,1,0,pastey,complex,coffee,vanilla
