@@ -399,7 +399,7 @@ index,ref,company,company_location,review_date,country_of_bean_origin,specific_b
 397,765,C-Amaro,Italy,2011,Trinidad,Trinidad,70,"2,5",2,1,0,0,0,0,1,0,burnt coffee,fatty,,
 398,749,C-Amaro,Italy,2011,Sao tome,Sao Tome,78,"2,25",2,1,0,0,0,0,1,0,burnt up front,,,
 399,809,C-Amaro,Italy,2012,Venezuela,Venezuela,80,3,2,1,0,0,0,0,1,0,nutty,ashey,coffee,
-400,1185,C-Amaro,Italy,2013,Ecuador,Ecuador,100,"3,5",1,1,0,0,0,0,0,0,fatty,controlled bitter,fruit,
+,,,,,,,,,,,,,,,,,,,,
 401,1442,C-Amaro,Italy,2014,Blend,"Lago di Como, Blu",70,"3,5",2,1,0,0,0,0,1,0,oily surface,berry,cream,
 402,1442,C-Amaro,Italy,2014,Dominican republic,Dominican Republic,72,3,2,1,0,0,0,0,1,0,intense,fatty,brownie,
 403,1442,C-Amaro,Italy,2014,Cuba,Cuba,75,"2,5",2,1,0,0,0,0,1,0,intense,ashey,earthen,
@@ -1058,7 +1058,7 @@ index,ref,company,company_location,review_date,country_of_bean_origin,specific_b
 1056,1038,Hotel Chocolat (Coppeneur),United Kingdom,2013,Trinidad,Trinidad,75,3,4,1,1,0,1,0,1,0,sandy,vegetal,sour,
 1057,1065,Hotel Chocolat (Coppeneur),United Kingdom,2013,Ecuador,"Los Rios, H. Iara",90,3,2,1,0,0,0,0,1,0,oily,leathery,intense bitter,
 1058,1065,Hotel Chocolat (Coppeneur),United Kingdom,2013,Madagascar,"Somia Plantation, Akesson, 2012, Rabot",72,3,4,1,1,0,1,0,1,0,nutty,mild coffee,,
-1059,1113,Hotel Chocolat (Coppeneur),United Kingdom,2013,Ecuador,"Los Rios, H. Iara, 2012, 120hr c., batch 13092",100,"2,5",1,1,0,0,0,0,0,0,candy,uncontrolled bitterness,,
+,,,,,,,,,,,,,,,,,,,,
 1060,1097,Hummingbird,Canada,2013,Venezuela,"Amazonas, batch 14",70,"3,75",3,1,1,0,0,0,1,0,nutty,coffee,rich,
 1061,1097,Hummingbird,Canada,2013,Venezuela,"Ocumare, Cumboto, batch 16",70,"3,25",3,1,1,0,0,0,1,0,fatty,gritty,roasty,
 1062,1311,Hummingbird,Canada,2014,Dominican republic,"Hispaniola, batch 73",70,"3,75",3,1,1,0,0,0,1,0,raisins,rich choco,,
@@ -1519,7 +1519,7 @@ index,ref,company,company_location,review_date,country_of_bean_origin,specific_b
 1517,1411,Ocho,New zealand,2014,Papua new guinea,"PNG, Revolution, WAG1",70,3,2,1,0,0,0,0,1,0,smoke,sour fruit,hammy,
 1518,1411,Ocho,New zealand,2014,Papua new guinea,"PNG, Devotion, batch 96, gogol naru",66,"2,75",2,1,0,0,0,0,1,0,smoke,sour fruit,hammy,
 1519,1760,Ocho,New zealand,2016,Samoa,Sang Yum Coop,70,"3,5",2,1,0,0,0,0,1,0,cocoa,roasty,nutty,
-1520,1760,Ocho,New zealand,2016,Samoa,Sang Yum Coop,100,"2,75",1,1,0,0,0,0,0,0,bitter,intense,nutty,
+,,,,,,,,,,,,,,,,,,,,
 1521,1598,Ohiyo,United States of America,2015,Tanzania,Tanzania,70,3,3,1,1,0,0,0,1,0,sweet,sandy,fruit,pungent
 1522,1594,Ohiyo,United States of America,2015,Trinidad,"San Juan Estate, Gran Couva",70,"2,75",3,1,1,0,0,0,1,0,off notes,sour,roasty,
 1523,761,Oialla by Bojessen (Malmo),Germany,2011,Bolivia,"Sylvestre, Oialla",70,"3,5",2,1,0,0,0,0,1,0,rich cocoa,one dimensional,,
@@ -1659,7 +1659,7 @@ index,ref,company,company_location,review_date,country_of_bean_origin,specific_b
 1657,105,Pralus,France,2006,Brazil,"Monte Alegre (Itacare), Brazil",75,3,4,1,1,0,1,0,1,0,creamy,fatty,burnt,
 1658,162,Pralus,France,2007,Sao tome,Claudio Corallo w/ nibs,75,4,4,1,1,0,1,0,1,0,large nibs,spicy,cocoa,
 1659,280,Pralus,France,2008,Brazil,"Monte Alegre, Diego Badero",75,"3,5",4,1,1,0,1,0,1,0,complex,herbal,sour,
-1660,202,Pralus,France,2008,Madagascar,"Sambirano Valley, Le 100%",100,3,2,1,1,0,0,0,0,0,fatty,mild fruit,bitter,smoke
+,,,,,,,,,,,,,,,,,,,,
 1661,280,Pralus,France,2008,Dominican republic,Dominican Republic-Organic,75,2,4,1,1,0,1,0,1,0,sandy,sour,,
 1662,451,Pralus,France,2009,Venezuela,Cuyagua,75,2,4,1,1,0,1,0,1,0,creamy,burnt,ashey,lemon
 1663,486,Pralus,France,2010,Venezuela,Chuao,75,"3,5",4,1,1,0,1,0,1,0,nutty,red berry,rich,
@@ -1835,8 +1835,8 @@ index,ref,company,company_location,review_date,country_of_bean_origin,specific_b
 1833,1343,Sirene,Canada,2014,Ecuador,"Camino Verde P., Balao, Guayas",73,"3,75",3,1,1,0,0,0,1,0,intense,rich,burnt,licorice
 1834,1614,Sirene,Canada,2015,Guatemala,"Lachua w/ maple sugar, batch 5",73,"3,25",2,1,0,0,0,0,0,1,waxy,maple,flat,
 1835,1650,Sirene,Canada,2015,Haiti,Pisa,73,"3,25",2,1,0,0,0,0,1,0,oily,medium roasted cocoa,,
-1836,1502,Sirene,Canada,2015,Madagascar,"Somia Plantation, 2012",100,3,1,1,0,0,0,0,0,0,creamy,tart,bitter,
-1837,1506,Sirene,Canada,2015,Ecuador,"Camino Verde P., Balao, Guayas, 2012",100,3,1,1,0,0,0,0,0,0,floral,bourbon,bitter,
+,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
 1838,1614,Sirene,Canada,2015,Guatemala,Lachua w/ cane sugar,73,3,2,1,0,0,0,0,1,0,waxy,earthy,cocoa,roasty
 1839,1860,Sirene,Canada,2016,Ecuador,"Esmeraldas, Salazar Farm",73,"3,75",2,1,0,0,0,0,1,0,rich cocoa,spicy,,
 1840,1788,Sirene,Canada,2016,Bolivia,Wild Bolivia,73,"3,5",2,1,0,0,0,0,1,0,sticky,raisins,fudgey,
