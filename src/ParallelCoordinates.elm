@@ -25,18 +25,18 @@ type Model
   = Fehlschlag
   | Laden
   | Erfolg 
-    { data : List Weine
-    , ersteFunktion : Weine -> Float
-    , zweiteFunktion : Weine -> Float
-    , dritteFunktion : Weine -> Float
-    , vierteFunktion : Weine -> Float
+    { data : List Chocolate
+    , ersteFunktion : Chocolate -> Float
+    , zweiteFunktion : Chocolate -> Float
+    , dritteFunktion : Chocolate -> Float
+    , vierteFunktion : Chocolate -> Float
     , ersterName : String
     , zweiterName : String
     , dritterName : String
     , vierterName : String
     }
 
-type alias Weine =
+type alias Chocolate =
     { name : String
     , alc : Float
     , temperatur : Float
@@ -51,10 +51,10 @@ type alias Weine =
 
 type Msg
     = ErhalteText (Result Http.Error String)
-    | Ändere1 (Weine -> Float, String)
-    | Ändere2 (Weine -> Float, String)
-    | Ändere3 (Weine -> Float, String)
-    | Ändere4 (Weine -> Float, String)
+    | Ändere1 (Chocolate -> Float, String)
+    | Ändere2 (Chocolate -> Float, String)
+    | Ändere3 (Chocolate -> Float, String)
+    | Ändere4 (Chocolate -> Float, String)
 
 type alias MultiDimPunkt =
     { punktName : String, value : List Float }
@@ -72,7 +72,7 @@ holenVonCsv x =
         |> List.map
             (\datensatz ->
                 Http.get
-                    { url = "https://raw.githubusercontent.com/RicBre/Elm-Projekt-WineInformation/main/Daten/AufbereiteteDaten/" ++ datensatz
+                    { url = "https://raw.githubusercontent.com/Fortuna1996/ChocolateBarVisualization/main/" ++ datensatz
                     , expect = Http.expectString x
                     }
             )
@@ -80,32 +80,33 @@ holenVonCsv x =
 
 liste : List String
 liste =
-    [ "WineInformationExcelAufbereitetKlein.csv"]
+    [ "chocolate%20(bearbeitet).csv"]
 
-csvStringZuDaten : String -> List Weine
+csvStringZuDaten : String -> List Chocolate
 csvStringZuDaten csvRoh =
     Csv.parse csvRoh
-        |> Csv.Decode.decodeCsv dekodierenWeine
+        |> Csv.Decode.decodeCsv dekodierenChocolate
         |> Result.toMaybe
         |> Maybe.withDefault []
 
-dekodierenWeine : Csv.Decode.Decoder (Weine -> a) a
-dekodierenWeine =
-    Csv.Decode.map Weine
-        (Csv.Decode.field "name" Ok
-            |> Csv.Decode.andMap (Csv.Decode.field "alc"(String.toFloat >> Result.fromMaybe "error parsing string"))
-            |> Csv.Decode.andMap (Csv.Decode.field "temperatur"(String.toFloat >> Result.fromMaybe "error parsing string"))
-            |> Csv.Decode.andMap (Csv.Decode.field "suesse"(String.toFloat >> Result.fromMaybe "error parsing string"))
-            |> Csv.Decode.andMap (Csv.Decode.field "saeurengehalt"(String.toFloat >> Result.fromMaybe "error parsing string"))
-            |> Csv.Decode.andMap (Csv.Decode.field "koerper"(String.toFloat >> Result.fromMaybe "error parsing string"))
-            |> Csv.Decode.andMap (Csv.Decode.field "gerbstoff"(String.toFloat >> Result.fromMaybe "error parsing string"))
-            |> Csv.Decode.andMap (Csv.Decode.field "preis"(String.toFloat >> Result.fromMaybe "error parsing string"))
-            |> Csv.Decode.andMap (Csv.Decode.field "jahr"(String.toFloat >> Result.fromMaybe "error parsing string"))
-            |> Csv.Decode.andMap (Csv.Decode.field "ml"(String.toFloat >> Result.fromMaybe "error parsing string"))
+dekodierenChocolate : Csv.Decode.Decoder (Chocolate -> a) a
+dekodierenChocolate =
+    Csv.Decode.map Chocolate
+        (Csv.Decode.field "index" Ok
+            |> Csv.Decode.andMap (Csv.Decode.field "cocoa_percent"(String.toFloat >> Result.fromMaybe "error parsing string"))
+            |> Csv.Decode.andMap (Csv.Decode.field "rating"(String.toFloat >> Result.fromMaybe "error parsing string"))
+            |> Csv.Decode.andMap (Csv.Decode.field "counts_of_ingredients"(String.toFloat >> Result.fromMaybe "error parsing string"))
+            |> Csv.Decode.andMap (Csv.Decode.field "beans"(String.toFloat >> Result.fromMaybe "error parsing string"))
+            |> Csv.Decode.andMap (Csv.Decode.field "cocoa_butter"(String.toFloat >> Result.fromMaybe "error parsing string"))
+            |> Csv.Decode.andMap (Csv.Decode.field "vanilla"(String.toFloat >> Result.fromMaybe "error parsing string"))
+            |> Csv.Decode.andMap (Csv.Decode.field "lecithin"(String.toFloat >> Result.fromMaybe "error parsing string"))
+            |> Csv.Decode.andMap (Csv.Decode.field "salt"(String.toFloat >> Result.fromMaybe "error parsing string"))
+            |> Csv.Decode.andMap (Csv.Decode.field "sugar"(String.toFloat >> Result.fromMaybe "error parsing string"))
+            |> Csv.Decode.andMap (Csv.Decode.field "sweetener_without_sugar"(String.toFloat >> Result.fromMaybe "error parsing string"))
         )
 
-weineListe :List String -> List Weine
-weineListe liste1 =
+chocolateListe :List String -> List Chocolate
+chocolateListe liste1 =
     List.map(\t -> csvStringZuDaten t) liste1
         |> List.concat
 
@@ -276,22 +277,22 @@ view : Model -> Html Msg
 view model =
     case model of
         Fehlschlag ->
-            Html.text "Ich konnte Ihre Weine nicht öffnen."
+            Html.text "Chocolate Bar could not be loaded."
 
         Laden ->
-            Html.text "Weine werden geöffnet..."
+            Html.text "Chocolate Bar is loading..."
 
         Erfolg l ->
                     let
-                        multiDimDaten : List Weine -> (Weine -> Float) -> (Weine -> Float) -> (Weine -> Float) -> (Weine -> Float) -> (Weine -> String) -> String -> String -> String -> String-> MultiDimData
-                        multiDimDaten listeWeine a b c d e f g h i=
+                        multiDimDaten : List Chocolate -> (Chocolate -> Float) -> (Chocolate -> Float) -> (Chocolate -> Float) -> (Chocolate -> Float) -> (Chocolate -> String) -> String -> String -> String -> String-> MultiDimData
+                        multiDimDaten listeChocolate a b c d e f g h i=
                          MultiDimData [f, g, h, i]
                             [ List.map
                                 (\x ->
                                     [(a x), (b x), (c x), (d x)]
                                         |> MultiDimPunkt (e x)
                                 )
-                                listeWeine
+                                listeChocolate
                             ]
 
                         plotDaten = 
@@ -302,57 +303,61 @@ view model =
                             ul[][
                                 li[][
                                     Html.text <| "Suchen eine Eigenschaft für die erste Spalte aus"
-                                    , Html.button [onClick (Ändere1 (.alc, "Durchschnittlicher Alkoholgehalt"))][Html.text "Alkoholgehalt"]
-                                    , Html.button [onClick (Ändere1 (.temperatur, "Durchschnittliche Trinktemperatur"))][Html.text "Trinktemperatur"]
-                                    , Html.button [onClick (Ändere1 (.suesse, "Süße"))][Html.text "Süße"]
-                                    , Html.button [onClick (Ändere1 (.saeurengehalt, "Säuregehalt"))][Html.text "Säuregehalt"]
-                                    , Html.button [onClick (Ändere1 (.koerper, "Körper"))][Html.text "Körper"]
-                                    , Html.button [onClick (Ändere1 (.gerbstoff, "Gerbstoffe"))][Html.text "Gerbstoffe"]
-                                    , Html.button [onClick (Ändere1 (.preis, "Preis"))][Html.text "Preis"]
-                                    , Html.button [onClick (Ändere1 (.jahr, "Jahr"))][Html.text "Jahr"]
-                                    , Html.button [onClick (Ändere1 (.ml, "Mililiter"))][Html.text "Mililiter"]
+                                    , Html.button [onClick (Ändere1 (.cocoa_percent, "Kakaoanteil"))][Html.text "Kakaoanteil"]
+                                    , Html.button [onClick (Ändere1 (.rating, "Bewertung"))][Html.text "Bewertung"]
+                                    , Html.button [onClick (Ändere1 (.counts_of_ingredients, "Anzahl der Zutaten"))][Html.text "Anzahl der Zutaten"]
+                                    , Html.button [onClick (Ändere1 (.beans, "Kakaobohnen"))][Html.text "Kakaobohnen"]
+                                    , Html.button [onClick (Ändere1 (.cocoa_butter, "Kakaobutter"))][Html.text "Kakaobutter"]
+                                    , Html.button [onClick (Ändere1 (.vanilla, "Vanille"))][Html.text "Vanille"]
+                                    , Html.button [onClick (Ändere1 (.lecithin, "Lecithin"))][Html.text "Lecithin"]
+                                    , Html.button [onClick (Ändere1 (.salt, "Salz"))][Html.text "Salz"]
+                                    , Html.button [onClick (Ändere1 (.sugar, "Zucker"))][Html.text "Zucker"]
+                                    , Html.button [onClick (Ändere1 (.sweetener_without_sugar, "Süßstoff"))][Html.text "Süßstoff"]
                                 ]
                             ]
                             , ul[][
                                 li[][
                                     Html.text <| "Suchen eine Eigenschaft für die zweite Spalte aus"
-                                    , Html.button [onClick (Ändere2 (.alc, "Durchschnittlicher Alkoholgehalt"))][Html.text "Alkoholgehalt"]
-                                    , Html.button [onClick (Ändere2 (.temperatur, "Durchschnittliche Trinktemperatur"))][Html.text "Trinktemperatur"]
-                                    , Html.button [onClick (Ändere2 (.suesse, "Süße"))][Html.text "Süße"]
-                                    , Html.button [onClick (Ändere2 (.saeurengehalt, "Säuregehalt"))][Html.text "Säuregehalt"]
-                                    , Html.button [onClick (Ändere2 (.koerper, "Körper"))][Html.text "Körper"]
-                                    , Html.button [onClick (Ändere2 (.gerbstoff, "Gerbstoffe"))][Html.text "Gerbstoffe"]
-                                    , Html.button [onClick (Ändere2 (.preis, "Preis"))][Html.text "Preis"]
-                                    , Html.button [onClick (Ändere2 (.jahr, "Jahr"))][Html.text "Jahr"]
-                                    , Html.button [onClick (Ändere2 (.ml, "Mililiter"))][Html.text "Mililiter"]
+                                    , Html.button [onClick (Ändere2 (.cocoa_percent, "Kakaoanteil"))][Html.text "Kakaoanteil"]
+                                    , Html.button [onClick (Ändere2 (.rating, "Bewertung"))][Html.text "Bewertung"]
+                                    , Html.button [onClick (Ändere2 (.counts_of_ingredients, "Anzahl der Zutaten"))][Html.text "Anzahl der Zutaten"]
+                                    , Html.button [onClick (Ändere2 (.beans, "Kakaobohnen"))][Html.text "Kakaobohnen"]
+                                    , Html.button [onClick (Ändere2 (.cocoa_butter, "Kakaobutter"))][Html.text "Kakaobutter"]
+                                    , Html.button [onClick (Ändere2 (.vanilla, "Vanille"))][Html.text "Vanille"]
+                                    , Html.button [onClick (Ändere2 (.lecithin, "Lecithin"))][Html.text "Lecithin"]
+                                    , Html.button [onClick (Ändere2 (.salt, "Salz"))][Html.text "Salz"]
+                                    , Html.button [onClick (Ändere2 (.sugar, "Zucker"))][Html.text "Zucker"]
+                                    , Html.button [onClick (Ändere2 (.sweetener_without_sugar, "Süßstoff"))][Html.text "Süßstoff"]
                                 ]
                             ]
                             , ul[][
                                 li[][
                                     Html.text <| "Suchen eine Eigenschaft für die dritte Spalte aus"
-                                    , Html.button [onClick (Ändere3 (.alc, "Durchschnittlicher Alkoholgehalt"))][Html.text "Alkoholgehalt"]
-                                    , Html.button [onClick (Ändere3 (.temperatur, "Durchschnittliche Trinktemperatur"))][Html.text "Trinktemperatur"]
-                                    , Html.button [onClick (Ändere3 (.suesse, "Süße"))][Html.text "Süße"]
-                                    , Html.button [onClick (Ändere3 (.saeurengehalt, "Säuregehalt"))][Html.text "Säuregehalt"]
-                                    , Html.button [onClick (Ändere3 (.koerper, "Körper"))][Html.text "Körper"]
-                                    , Html.button [onClick (Ändere3 (.gerbstoff, "Gerbstoffe"))][Html.text "Gerbstoffe"]
-                                    , Html.button [onClick (Ändere3 (.preis, "Preis"))][Html.text "Preis"]
-                                    , Html.button [onClick (Ändere3 (.jahr, "Jahr"))][Html.text "Jahr"]
-                                    , Html.button [onClick (Ändere3 (.ml, "Mililiter"))][Html.text "Mililiter"]
+                                    , Html.button [onClick (Ändere3 (.cocoa_percent, "Kakaoanteil"))][Html.text "Kakaoanteil"]
+                                    , Html.button [onClick (Ändere3 (.rating, "Bewertung"))][Html.text "Bewertung"]
+                                    , Html.button [onClick (Ändere3 (.counts_of_ingredients, "Anzahl der Zutaten"))][Html.text "Anzahl der Zutaten"]
+                                    , Html.button [onClick (Ändere3 (.beans, "Kakaobohnen"))][Html.text "Kakaobohnen"]
+                                    , Html.button [onClick (Ändere3 (.cocoa_butter, "Kakaobutter"))][Html.text "Kakaobutter"]
+                                    , Html.button [onClick (Ändere3 (.vanilla, "Vanille"))][Html.text "Vanille"]
+                                    , Html.button [onClick (Ändere3 (.lecithin, "Lecithin"))][Html.text "Lecithin"]
+                                    , Html.button [onClick (Ändere3 (.salt, "Salz"))][Html.text "Salz"]
+                                    , Html.button [onClick (Ändere3 (.sugar, "Zucker"))][Html.text "Zucker"]
+                                    , Html.button [onClick (Ändere3 (.sweetener_without_sugar, "Süßstoff"))][Html.text "Süßstoff"]
                                 ]
                             ]
                             , ul[][
                                 li[][
                                     Html.text <| "Suchen eine Eigenschaft für die vierte Spalte aus"
-                                    , Html.button [onClick (Ändere4 (.alc, "Durchschnittlicher Alkoholgehalt"))][Html.text "Alkoholgehalt"]
-                                    , Html.button [onClick (Ändere4 (.temperatur, "Durchschnittliche Trinktemperatur"))][Html.text "Trinktemperatur"]
-                                    , Html.button [onClick (Ändere4 (.suesse, "Süße"))][Html.text "Süße"]
-                                    , Html.button [onClick (Ändere4 (.saeurengehalt, "Säuregehalt"))][Html.text "Säuregehalt"]
-                                    , Html.button [onClick (Ändere4 (.koerper, "Körper"))][Html.text "Körper"]
-                                    , Html.button [onClick (Ändere4 (.gerbstoff, "Gerbstoffe"))][Html.text "Gerbstoffe"]
-                                    , Html.button [onClick (Ändere4 (.preis, "Preis"))][Html.text "Preis"]
-                                    , Html.button [onClick (Ändere4 (.jahr, "Jahr"))][Html.text "Jahr"]
-                                    , Html.button [onClick (Ändere4 (.ml, "Mililiter"))][Html.text "Mililiter"]
+                                    , Html.button [onClick (Ändere4 (.cocoa_percent, "Kakaoanteil"))][Html.text "Kakaoanteil"]
+                                    , Html.button [onClick (Ändere4 (.rating, "Bewertung"))][Html.text "Bewertung"]
+                                    , Html.button [onClick (Ändere4 (.counts_of_ingredients, "Anzahl der Zutaten"))][Html.text "Anzahl der Zutaten"]
+                                    , Html.button [onClick (Ändere4 (.beans, "Kakaobohnen"))][Html.text "Kakaobohnen"]
+                                    , Html.button [onClick (Ändere4 (.cocoa_butter, "Kakaobutter"))][Html.text "Kakaobutter"]
+                                    , Html.button [onClick (Ändere4 (.vanilla, "Vanille"))][Html.text "Vanille"]
+                                    , Html.button [onClick (Ändere4 (.lecithin, "Lecithin"))][Html.text "Lecithin"]
+                                    , Html.button [onClick (Ändere4 (.salt, "Salz"))][Html.text "Salz"]
+                                    , Html.button [onClick (Ändere4 (.sugar, "Zucker"))][Html.text "Zucker"]
+                                    , Html.button [onClick (Ändere4 (.sweetener_without_sugar, "Süßstoff"))][Html.text "Süßstoff"]
                                 ]
                              ]
                                 ,paralleleKoordinatenPlan 600 2 plotDaten
@@ -364,7 +369,7 @@ update msg model =
         ErhalteText ergebnis ->
             case ergebnis of
                 Ok fullText ->
-                    ( Erfolg <| { data = weineListe [ fullText ], ersteFunktion = .alc, zweiteFunktion = .temperatur, dritteFunktion = .suesse, vierteFunktion = .saeurengehalt , ersterName = "Alkohol", zweiterName = "Temperatur", dritterName = "Süße", vierterName = "Säuregehalt"}, Cmd.none )
+                    ( Erfolg <| { data = chocolateListe [ fullText ], ersteFunktion = .alc, zweiteFunktion = .temperatur, dritteFunktion = .suesse, vierteFunktion = .saeurengehalt , ersterName = "Alkohol", zweiterName = "Temperatur", dritterName = "Süße", vierterName = "Säuregehalt"}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
