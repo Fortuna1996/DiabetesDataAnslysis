@@ -20,7 +20,6 @@
             "folkertdev/one-true-path-experiment": "6.0.0",
             "gampleman/elm-visualization": "2.3.0",
             "lovasoa/elm-csv": "1.1.7",
-            "wasdacraic/elm-tree-layout": "1.0.1",
             "zwilias/elm-rosetree": "1.5.0"
         },
         "indirect": {
