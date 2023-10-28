@@ -18,7 +18,7 @@ import TypedSvg.Attributes exposing (d, fill, fontFamily, fontSize, stroke, stro
 import TypedSvg.Attributes.InPx exposing (x, y)
 import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Paint(..), Transform(..))
-
+import Tuple exposing (second)
 
 
 type Model
@@ -72,7 +72,7 @@ holenVonCsv x =
         |> List.map
             (\datensatz ->
                 Http.get
-                    { url = "https://raw.githubusercontent.com/Fortuna1996/ChocolateBarVisualization/main/" ++ datensatz
+                    { url = "https://raw.githubusercontent.com/Fortuna1996/LungCancerPrediction/main/" ++ datensatz
                     , expect = Http.expectString x
                     }
             )
