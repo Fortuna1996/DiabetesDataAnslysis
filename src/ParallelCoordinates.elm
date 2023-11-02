@@ -19,6 +19,7 @@ import TypedSvg.Attributes.InPx exposing (x, y)
 import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Paint(..), Transform(..))
 import Tuple exposing (second)
+import Csv exposing (Csv)
 
 
 type Model
