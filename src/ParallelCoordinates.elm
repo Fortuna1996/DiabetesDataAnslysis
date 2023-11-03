@@ -30,36 +30,36 @@ type Model
   = Fehlschlag
   | Laden
   | Erfolg 
-    { data : List Chocolate
-    , ersteFunktion : Chocolate -> Float
-    , zweiteFunktion : Chocolate -> Float
-    , dritteFunktion : Chocolate -> Float
-    , vierteFunktion : Chocolate -> Float
+    { data : List LungCancerPrediction
+    , ersteFunktion : LungCancerPrediction -> Float
+    , zweiteFunktion : LungCancerPrediction -> Float
+    , dritteFunktion : LungCancerPrediction -> Float
+    , vierteFunktion : LungCancerPrediction -> Float
     , ersterName : String
     , zweiterName : String
     , dritterName : String
     , vierterName : String
     }
 
-type alias Chocolate =
-    { name : String
-    , alc : Float
-    , temperatur : Float
-    , suesse : Float
-    , saeurengehalt : Float
-    , koerper : Float
-    , gerbstoff : Float
-    , preis : Float
-    , jahr : Float
-    , ml : Float
+type alias LungCancerPrediction =
+    { index : Float
+    , patientId : String
+    , age : Float
+    , gender : Float
+    , airPollution : Float
+    , alcoholUse : Float
+    , dustAllergy : Float
+    , geneticRisk : Float
+    , obesity : Float
+    , smoking : Float
     }
 
 type Msg
     = ErhalteText (Result Http.Error String)
-    | Ändere1 (Chocolate -> Float, String)
-    | Ändere2 (Chocolate -> Float, String)
-    | Ändere3 (Chocolate -> Float, String)
-    | Ändere4 (Chocolate -> Float, String)
+    | Ändere1 (LungCancerPrediction -> Float, String)
+    | Ändere2 (LungCancerPrediction -> Float, String)
+    | Ändere3 (LungCancerPrediction -> Float, String)
+    | Ändere4 (LungCancerPrediction -> Float, String)
 
 type alias MultiDimPunkt =
     { punktName : String, value : List Float }
@@ -87,16 +87,16 @@ liste : List String
 liste =
     [ "chocolate%20(bearbeitet).csv"]
 
-csvStringZuDaten : String -> List Chocolate
+csvStringZuDaten : String -> List LungCancerPrediction
 csvStringZuDaten csvRoh =
     Csv.parse csvRoh
-        |> Csv.Decode.decodeCsv dekodierenChocolate
+        |> Csv.Decode.decodeCsv dekodierenLungCancerPrediction
         |> Result.toMaybe
         |> Maybe.withDefault []
 
-dekodierenChocolate : Csv.Decode.Decoder (Chocolate -> a) a
-dekodierenChocolate =
-    Csv.Decode.map Chocolate
+dekodierenLungCancerPrediction : Csv.Decode.Decoder (LungCancerPrediction -> a) a
+dekodierenLungCancerPrediction =
+    Csv.Decode.map LungCancerPrediction
         (Csv.Decode.field "index" Ok
             |> Csv.Decode.andMap (Csv.Decode.field "cocoa_percent"(String.toFloat >> Result.fromMaybe "error parsing string"))
             |> Csv.Decode.andMap (Csv.Decode.field "rating"(String.toFloat >> Result.fromMaybe "error parsing string"))
@@ -110,8 +110,8 @@ dekodierenChocolate =
             |> Csv.Decode.andMap (Csv.Decode.field "sweetener_without_sugar"(String.toFloat >> Result.fromMaybe "error parsing string"))
         )
 
-chocolateListe :List String -> List Chocolate
-chocolateListe liste1 =
+lungCancerPredictionListe :List String -> List LungCancerPrediction
+lungCancerPredictionListe liste1 =
     List.map(\t -> csvStringZuDaten t) liste1
         |> List.concat
 
@@ -289,15 +289,15 @@ view model =
 
         Erfolg l ->
                     let
-                        multiDimDaten : List Chocolate -> (Chocolate -> Float) -> (Chocolate -> Float) -> (Chocolate -> Float) -> (Chocolate -> Float) -> (Chocolate -> String) -> String -> String -> String -> String-> MultiDimData
-                        multiDimDaten listeChocolate a b c d e f g h i=
+                        multiDimDaten : List LungCancerPrediction -> (LungCancerPrediction -> Float) -> (LungCancerPrediction -> Float) -> (LungCancerPrediction -> Float) -> (LungCancerPrediction -> Float) -> (LungCancerPrediction -> String) -> String -> String -> String -> String-> MultiDimData
+                        multiDimDaten listeLungCancerPrediction a b c d e f g h i=
                          MultiDimData [f, g, h, i]
                             [ List.map
                                 (\x ->
                                     [(a x), (b x), (c x), (d x)]
                                         |> MultiDimPunkt (e x)
                                 )
-                                listeChocolate
+                                listeLungCancerPrediction
                             ]
 
                         plotDaten = 
@@ -374,7 +374,7 @@ update msg model =
         ErhalteText ergebnis ->
             case ergebnis of
                 Ok fullText ->
-                    ( Erfolg <| { data = chocolateListe [ fullText ], ersteFunktion = .alc, zweiteFunktion = .temperatur, dritteFunktion = .suesse, vierteFunktion = .saeurengehalt , ersterName = "Alkohol", zweiterName = "Temperatur", dritterName = "Süße", vierterName = "Säuregehalt"}, Cmd.none )
+                    ( Erfolg <| { data = lungCancerPredictionListe [ fullText ], ersteFunktion = .alc, zweiteFunktion = .temperatur, dritteFunktion = .suesse, vierteFunktion = .saeurengehalt , ersterName = "Alkohol", zweiterName = "Temperatur", dritterName = "Süße", vierterName = "Säuregehalt"}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
