@@ -16,33 +16,39 @@ import Browser
 import Html exposing (li)
 import Html.Events exposing (onClick)
 import Html exposing (ul)
+import Html.Attributes
+import FontAwesome
+import FontAwesome.Solid
+import FontAwesome.Attributes
+import Json.Decode
+
 
 type Model
  = Error
  | Loading
  | Success
-    { data : List Chocolate
-    , xFunction : Chocolate -> Float
-    , yFunction : Chocolate -> Float
+    { data : List LungCancerPrediction
+    , xFunction : LungCancerPrediction -> Float
+    , yFunction : LungCancerPrediction -> Float
     , xName : String
     , yName : String
     }
 
-type alias Chocolate =
-    { company : String
-    , review_date : Float
-    , salt : Float
-    , rating : Float
-    , beans : Float
-    , cocoa_butter : Float
-    , sugar : Float
-    , sweetener_without_sugar : Float
-    , lecithin : Float
+type alias LungCancerPrediction =
+    { patientId : String
+    , age : Float
+    , gender : Float
+    , airPollution : Float
+    , alcoholUse : Float
+    , dustAllergy : Float
+    , geneticRisk : Float
+    , obesity : Float
+    , smoking : Float
     }
 type Msg
     = GotText (Result Http.Error String)
-    | ChangeX (Chocolate -> Float, String)
-    | ChangeY (Chocolate -> Float, String)
+    | ChangeX (LungCancerPrediction -> Float, String)
+    | ChangeY (LungCancerPrediction -> Float, String)
 
 type alias Point = 
     { pointName : String, x : Float, y : Float }
@@ -71,7 +77,7 @@ getCsv x =
         |> List.map
             (\data ->
                 Http.get
-                    { url = "https://raw.githubusercontent.com/Fortuna1996/ChocolateBarVisualization/main/" ++ data
+                    { url = "https://raw.githubusercontent.com/Fortuna1996/LungCancerPrediction/main/" ++ data
                     , expect = Http.expectString x
                     }
             )
@@ -81,26 +87,26 @@ list : List String
 list = 
     [ "chocolate%20(bearbeitet).csv" ]
 
-csvStringToData : String -> List Chocolate
+csvStringToData : String -> List LungCancerPrediction
 csvStringToData csvR =
     Csv.parse csvR
-        |> Csv.Decode.decodeCsv decodingChocolate
+        |> Csv.Decode.decodeCsv decodingLungCancerPrediction
         |> Result.toMaybe
         |>Maybe.withDefault []
 
-decodingChocolate : Csv.Decode.Decoder (Chocolate -> a) a
-decodingChocolate =
-        Csv.Decode.map Chocolate
+decodingLungCancerPrediction : Csv.Decode.Decoder (LungCancerPrediction -> a) a
+decodingLungCancerPrediction =
+        Csv.Decode.map LungCancerPrediction
             (Csv.Decode.field "company" Ok 
                 
-                |> Csv.Decode.andMap (Csv.Decode.field "review_date"(String.toFloat >> Result.fromMaybe "error parsing string"))
-                |> Csv.Decode.andMap (Csv.Decode.field "salt"(String.toFloat >> Result.fromMaybe "error parsing string"))
-                |> Csv.Decode.andMap (Csv.Decode.field "rating"(String.toFloat >> Result.fromMaybe "error parsing string"))
-                |> Csv.Decode.andMap (Csv.Decode.field "beans"(String.toFloat >> Result.fromMaybe "error parsing string"))
-                |> Csv.Decode.andMap (Csv.Decode.field "cocoa_butter"(String.toFloat >> Result.fromMaybe "error parsing string"))
-                |> Csv.Decode.andMap (Csv.Decode.field "sugar"(String.toFloat >> Result.fromMaybe "error parsing string"))
-                |> Csv.Decode.andMap (Csv.Decode.field "sweetener_without_suggar"(String.toFloat >> Result.fromMaybe "error parsing string"))
-                |> Csv.Decode.andMap (Csv.Decode.field "lecithin"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "age"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "gender"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "airPollution"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "alcoholUse"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "dustAllergy"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "geneticRisk"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "obesity"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "smoking"(String.toFloat >> Result.fromMaybe "error parsing string"))
             )
             -- hinzufügen update : Msg
 
@@ -111,7 +117,7 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = chocolateList [ fullText ], xFunction = .rating, yFunction = .salt, xName = "Bewertung", yName = "Kakaogehalt"}, Cmd.none )
+                    ( Success <| { data = lungCancerPredictionList [ fullText ], xFunction = .rating, yFunction = .salt, xName = "Bewertung", yName = "Kakaogehalt"}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
@@ -130,15 +136,15 @@ update msg model =
                 _ ->
                     ( model, Cmd.none )
 
-chocolateList :List String -> List Chocolate
-chocolateList list1 =
+lungCancerPredictionList :List String -> List LungCancerPrediction
+lungCancerPredictionList list1 =
     List.map(\t -> csvStringToData t) list1
         |> List.concat
 
-filterReducedchocolate : List Chocolate -> (Chocolate -> String) -> (Chocolate -> Float) -> (Chocolate->Float) -> String -> String -> XYData 
+filterReducedlungCancerPrediction : List LungCancerPrediction -> (LungCancerPrediction -> String) -> (LungCancerPrediction -> Float) -> (LungCancerPrediction->Float) -> String -> String -> XYData 
 
-filterReducedchocolate chocolateliste a b c x y =
-    XYData x y (List.map (\n -> pointName n a b c x y) chocolateliste)
+filterReducedlungCancerPrediction lungCancerPredictionliste a b c x y =
+    XYData x y (List.map (\n -> pointName n a b c x y) lungCancerPredictionliste)
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
@@ -209,9 +215,9 @@ wideExtent values =
             adding result1 (0.0)       
     in
         result2
-pointName : Chocolate -> (Chocolate -> String) -> (Chocolate -> Float) -> (Chocolate -> Float) -> String -> String -> Point
-pointName chocolate u v x y z =
-    Point (u chocolate ++ ", " ++ y ++ ": " ++ String.fromFloat (v chocolate) ++ ", " ++ z ++ ": " ++ String.fromFloat (x chocolate)) (v chocolate) (x chocolate)
+pointName : LungCancerPrediction -> (LungCancerPrediction -> String) -> (LungCancerPrediction -> Float) -> (LungCancerPrediction -> Float) -> String -> String -> Point
+pointName lungCancerPrediction u v x y z =
+    Point (u lungCancerPrediction ++ ", " ++ y ++ ": " ++ String.fromFloat (v lungCancerPrediction) ++ ", " ++ z ++ ": " ++ String.fromFloat (x lungCancerPrediction)) (v lungCancerPrediction) (x lungCancerPrediction)
 
 point : ContinuousScale Float -> ContinuousScale Float -> Point -> Svg msg
 point scaleX scaleY yxPoint =
@@ -303,8 +309,8 @@ view model =
 
         Success l ->
             let
-                chocolate =
-                    filterReducedchocolate l.data .company l.xFunction l.yFunction l.xName l.yName
+                lungCancerPrediction =
+                    filterReducedlungCancerPrediction l.data .company l.xFunction l.yFunction l.xName l.yName
 
             in 
             Html.div []
@@ -335,5 +341,5 @@ view model =
                             , Html.button [onClick (ChangeY (.lecithin, "Lecithin"))] [Html.text "Lecithin"]
                        ]
                     ]
-                    ,   scatterplot chocolate
+                    ,   scatterplot lungCancerPrediction
                 ]
