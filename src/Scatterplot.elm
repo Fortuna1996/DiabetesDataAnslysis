@@ -20,43 +20,52 @@ import Html.Attributes
 import FontAwesome
 import FontAwesome.Solid
 import FontAwesome.Attributes
-import Json.Decode
 
+import Patients exposing (..)
+
+type alias Data =
+    { data : List LungCancerPrediction
+    , xFunction : LungCancerPrediction -> Float
+    , yFunction : LungCancerPrediction -> Float
+    , xName : String 
+    , yName : String
+    , chosendata : Maybe LungCancerPrediction
+    }
 
 type Model
  = Error
  | Loading
- | Success
-    { data : List LungCancerPrediction
-    , xFunction : LungCancerPrediction -> Float
-    , yFunction : LungCancerPrediction -> Float
-    , xName : String
-    , yName : String
-    }
+ | Success Data
+
 
 type alias LungCancerPrediction =
-    { patientId : String
+    { gender : Gender
+    , index : Float
     , age : Float
-    , gender : Float
     , airPollution : Float
     , alcoholUse : Float
     , dustAllergy : Float
     , geneticRisk : Float
-    , obesity : Float
+    , obesity: Float
     , smoking : Float
     }
 type Msg
     = GotText (Result Http.Error String)
     | ChangeX (LungCancerPrediction -> Float, String)
     | ChangeY (LungCancerPrediction -> Float, String)
+    | PointChosen LungCancerPrediction
+
+
 
 type alias Point = 
-    { pointName : String, x : Float, y : Float }
+    { pointName : String, x : Float, y : Float, gender: Gender}
 type alias XYData =
     { xDescription : String
     , yDescription : String
     , data : List Point
+    , chosendata : Maybe Point
     }
+
 main : Program () Model Msg
 main =
   Browser.element
@@ -83,9 +92,10 @@ getCsv x =
             )
         |> Cmd.batch
 
+
 list : List String 
 list = 
-    [ "chocolate%20(bearbeitet).csv" ]
+    [ "cancer%20patient%20data%20sets%20update2.csv" ]
 
 csvStringToData : String -> List LungCancerPrediction
 csvStringToData csvR =
@@ -97,16 +107,17 @@ csvStringToData csvR =
 decodingLungCancerPrediction : Csv.Decode.Decoder (LungCancerPrediction -> a) a
 decodingLungCancerPrediction =
         Csv.Decode.map LungCancerPrediction
-            (Csv.Decode.field "company" Ok 
+            (Csv.Decode.field "gender" (\s -> Result.fromMaybe "gender not ok" (Just (genderFlag s)))
                 
+                |> Csv.Decode.andMap (Csv.Decode.field "index"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "age"(String.toFloat >> Result.fromMaybe "error parsing string"))
-                |> Csv.Decode.andMap (Csv.Decode.field "gender"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "airPollution"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "alcoholUse"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "dustAllergy"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "geneticRisk"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "obesity"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "smoking"(String.toFloat >> Result.fromMaybe "error parsing string"))
+
             )
             -- hinzufügen update : Msg
 
@@ -117,34 +128,45 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = lungCancerPredictionList [ fullText ], xFunction = .rating, yFunction = .salt, xName = "Bewertung", yName = "Kakaogehalt"}, Cmd.none )
+                    ( Success <| { data = lungCancerPredictionList [ fullText ], xFunction = .airPollution, yFunction = .alcoholUse, xName = "Luftverschmutzung.", yName = "Alkoholkonsum", chosendata = Nothing}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
         ChangeX (x, a) ->
             case model of
                 Success m ->
-                    ( Success <| { data = m.data, xFunction = x, yFunction = m.yFunction, xName = a, yName = m.yName }, Cmd.none )
+                    ( Success <| { data = m.data, xFunction = x, yFunction = m.yFunction, xName = a, yName = m.yName , chosendata = m.chosendata}, Cmd.none )
+                    --( Success <| {m.data| xFunction=x, xName=a}, Cmd.none)
 
                 _ ->
                     ( model, Cmd.none )
         ChangeY (y, a) ->
             case model of
                 Success m ->
-                    ( Success <| { data = m.data, xFunction = m.xFunction, yFunction = y, xName = m.xName, yName = a }, Cmd.none )
+                    ( Success <| { data = m.data, xFunction = m.xFunction, yFunction = y, xName = m.xName, yName = a, chosendata = m.chosendata }, Cmd.none )
 
                 _ ->
                     ( model, Cmd.none )
+        PointChosen sac ->
+            case model of
+                Success m ->
+                    ( Success <| { data = m.data, xFunction = m.xFunction, yFunction = m.yFunction, xName = m.xName, yName = m.yName, chosendata = Just sac }, Cmd.none )
+
+                _ ->
+                    ( model, Cmd.none )
+
+
 
 lungCancerPredictionList :List String -> List LungCancerPrediction
 lungCancerPredictionList list1 =
     List.map(\t -> csvStringToData t) list1
         |> List.concat
 
-filterReducedlungCancerPrediction : List LungCancerPrediction -> (LungCancerPrediction -> String) -> (LungCancerPrediction -> Float) -> (LungCancerPrediction->Float) -> String -> String -> XYData 
+{- filterReducedLungCancerPrediction : List LungCancerPrediction -> Maybe LungCancerPrediction -> (LungCancerPrediction -> String) -> (LungCancerPrediction -> Float) -> (LungCancerPrediction->Float) -> String -> String -> XYData 
 
-filterReducedlungCancerPrediction lungCancerPredictionliste a b c x y =
-    XYData x y (List.map (\n -> pointName n a b c x y) lungCancerPredictionliste)
+filterReducedLungCancerPrediction lungCancerPredictionsliste mchosen a b c x y =
+    XYData x y (List.map (\n -> pointName n a b c x y) lungCancerPredictionsliste) (Maybe.map (\n -> pointName n a b c x y ) mchosen)
+ -}
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
@@ -215,40 +237,147 @@ wideExtent values =
             adding result1 (0.0)       
     in
         result2
-pointName : LungCancerPrediction -> (LungCancerPrediction -> String) -> (LungCancerPrediction -> Float) -> (LungCancerPrediction -> Float) -> String -> String -> Point
-pointName lungCancerPrediction u v x y z =
-    Point (u lungCancerPrediction ++ ", " ++ y ++ ": " ++ String.fromFloat (v lungCancerPrediction) ++ ", " ++ z ++ ": " ++ String.fromFloat (x lungCancerPrediction)) (v lungCancerPrediction) (x lungCancerPrediction)
+
+genderLabel : Gender -> String
+genderLabel gender =
+    case gender of
+        M ->
+            "männlich"
+
+        F ->
+            "weiblich"
+
+        _ ->
+            "unbekannt"
+
+
+genderFlag : String -> Gender
+genderFlag gender =
+    case gender of
+        "M" ->
+            M
+
+        "F" ->
+            F
+
+        _ ->
+            UnknownGender
+
+
+
+{- pointName : LungCancerPrediction -> (LungCancerPrediction -> String) -> (LungCancerPrediction -> Float) -> (LungCancerPrediction -> Float) -> String -> String -> Point
+   pointName lungCancerPrediction u v x y z =
+       Point (genderLabel (u lungCancerPrediction) ++ ", " ++ y ++ ": " ++ String.fromFloat (v lungCancerPrediction) ++ ", " ++ z ++ ": " ++ String.fromFloat (x lungCancerPrediction)) (v lungCancerPrediction) (x lungCancerPrediction) (genderFlag (u lungCancerPrediction))
+-}
+
 
 point : ContinuousScale Float -> ContinuousScale Float -> Point -> Svg msg
 point scaleX scaleY yxPoint =
     g
-        [
-            class["point"]
-            ,fontSize <| Px 15.0
-            ,fontFamily ["Times New Roman"]
-            ,transform
-                [
-                    Translate
-                    (Scale.convert scaleX yxPoint.x)
-                    (Scale.convert scaleY yxPoint.y)
+        [ class
+            [ "point"
+            , case yxPoint.gender of
+                M ->
+                    "gender-male"
+
+                F ->
+                    "gender-female"
+
+                UnknownGender ->
+                    "gender-unknown"
+            ]
+        , fontSize <| Px 15.0
+
+        {- ,transform
+           [
+               Translate
+               --(Scale.convert scaleX yxPoint.x)
+               --(Scale.convert scaleY yxPoint.y)
+           ]
+        -}
+        ]
+        [ circle [ cx (Scale.convert scaleX yxPoint.x), cy (Scale.convert scaleY yxPoint.y), r 5 ] []
+        , text_ [ x ((w / 4) + 0), y -20 ] [ Html.text yxPoint.pointName ]
+        ]
+
+
+drawpoint : ContinuousScale Float -> ContinuousScale Float -> (LungCancerPrediction -> Float) -> String -> (LungCancerPrediction -> Float) -> String -> LungCancerPrediction -> Svg Msg
+drawpoint scaleX scaleY xfunc xname yfunc yname sac =
+    g
+        [ class
+            [ "point"
+            , case sac.gender of
+                M ->
+                    "gender-male"
+
+                F ->
+                    "gender-female"
+
+                UnknownGender ->
+                    "gender-unknown"
+            ]
+        , fontSize <| Px 15.0
+
+        {- ,transform
+           [
+               Translate
+               (Scale.convert scaleX (xfunc sac))
+               (Scale.convert scaleY (yfunc sac))
+           ]
+        -}
+        ]
+        [ circle [ cx (Scale.convert scaleX (xfunc sac)), cy (Scale.convert scaleY (yfunc sac)), r 5 ] []
+        , text_ [ x ((w / 4) + 0), y -20 ] [ Html.text (genderLabel sac.gender ++ ", " ++ xname ++ ": " ++ String.fromFloat (xfunc sac) ++ ", " ++ yname ++ ": " ++ String.fromFloat (yfunc sac)) ]
+        ]
+
+
+drawChosenpoint : ContinuousScale Float -> ContinuousScale Float -> (LungCancerPrediction -> Float) -> (LungCancerPrediction -> Float) -> Maybe LungCancerPrediction -> String -> String -> List (Svg Msg)
+drawChosenpoint scaleX scaleY xfunc yfunc msac xname yname =
+    case msac of
+        Nothing ->
+            []
+
+        Just sac ->
+            [ g
+                [ class
+                    [ "cpoint"
+                    , case sac.gender of
+                        M ->
+                            "gender-male"
+
+                        F ->
+                            "gender-female"
+
+                        UnknownGender ->
+                            "gender-unknown"
+                    ]
+                , fontSize <| Px 15.0
+
+                {- ,transform
+                   [
+                       Translate
+                       (Scale.convert scaleX (xfunc sac))
+                       (Scale.convert scaleY (yfunc sac))
+                   ]
+                -}
                 ]
-        ]
+                [ circle [ cx (Scale.convert scaleX (xfunc sac)), cy (Scale.convert scaleY (yfunc sac)), r 5 ] []
+                , text_ [ x ((w / 4) + 0), y -20 ] [] --[ Html.text (genderLabel sac.gender ++ ", " ++ xname ++ ": " ++ String.fromFloat (xfunc sac) ++ ", " ++ yname ++ ": " ++ String.fromFloat (yfunc sac)) ]
+                ]
+            ]
 
-        [
-            circle [cx 0, cy 0, r 5] []
-            , text_ [x 10, y -20, textAnchor AnchorMiddle] [Html.text yxPoint.pointName]
-        ]
 
-scatterplot : XYData -> Svg msg
+
+scatterplot : Data -> Svg Msg
 scatterplot model =
     let
         xValues : List Float
         xValues =
-            List.map .x model.data
+            List.map model.xFunction model.data
 
         yValues : List Float
         yValues =
-            List.map .y model.data
+            List.map model.yFunction model.data
 
         xScaleLocal : ContinuousScale Float
         xScaleLocal =
@@ -269,77 +398,265 @@ scatterplot model =
             }
     in
     svg [ viewBox 0 0 w h, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ]
-        [ style [] [ TypedSvg.Core.text """
-            .point circle { stroke-opacity: 0.2 ; stroke-width: 2 ; stroke: rgba(2, 19, 100, 0.8); fill: rgba(255, 255, 255,0.3); }
-            .point text { display: none; }
-            .point:hover circle { stroke: rgba(154, 22, 90, 0.8); fill: rgb(65, 209, 204); }
-            .point:hover text { display: inline; }
-          """ ]
+        [ style
+            []
+            [ TypedSvg.Core.text
+                """
+                .point circle {
+                    stroke: #dddddd;
+                    fill: #dddddd;
+                    stroke-width: 2;
+                    stroke-opacity: 0.3;
+                    fill-opacity: 0.05;
+                    transition: fill 0.2s ease, border 0.1s ease;
+                }
+
+                .Cpoint circle {
+                    stroke: #000000;
+                    fill: #000000;
+                    stroke-width: 0;
+                }
+
+                .point.gender-male circle {
+                    stroke: #55bfff;
+                    fill: #55bfff;
+                }
+
+                .point.gender-female circle {
+                    stroke: #ff455f;
+                    fill: #ff455f;
+                }
+
+                .point text {
+                    font-family: "Inter Tight", sans-serif;
+                    fill: #000000;
+                    stroke-width: 4;
+                    text-shadow: 1px 1px 4px #fff, 1px -1px 4px #fff, -1px 1px 4px #fff, -1px -1px 4px #fff;
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: opacity 0.s ease;
+                }
+
+                .point:hover circle {
+                    stroke-opacity: 1;
+                    fill-opacity: 1;
+                }
+
+                .point:hover text {
+                    visibility: visible;
+                    opacity: 1;
+                }
+                """
+            ]
         , g [ transform [ Translate 60 390 ] ]
             [ xAsis xValues
             , text_
                 [ x (Scale.convert xScaleLocal labelPosition.x)
                 , y 35
-                 , fontFamily [ "Times New Roman" ]
+                , fontFamily [ "Helvetica", "sans-serif" ]
                 , fontSize (px 20)
                 ]
-                [ TypedSvg.Core.text model.xDescription ]
+                [ TypedSvg.Core.text model.xName ]
             ]
         , g [ transform [ Translate 60 60 ] ]
             [ yAxis yValues
             , text_
                 [ x -30
                 , y -30
-                , fontFamily [ "Times New Roman" ]
+                , fontFamily [ "Helvetica", "sans-serif" ]
                 , fontSize (px 20)
                 ]
-                [ TypedSvg.Core.text model.yDescription ]
+                [ TypedSvg.Core.text model.yName ]
             ]
         , g [ transform [ Translate padding padding ] ]
-            (List.map (point xScaleLocal yScaleLocal) model.data)
+            (drawChosenpoint xScaleLocal yScaleLocal model.xFunction model.yFunction model.chosendata model.xName model.yName
+                ++ List.map (drawpoint xScaleLocal yScaleLocal model.xFunction model.xName model.yFunction model.yName) model.data
+            )
         ]
+
+
+
+stylesheet : Html.Html Msg
+stylesheet =
+  let
+    styles = 
+        """
+        #scatterplot-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em 3em;
+            margin: -1.5em -1em 1em -1em;
+            padding: 1em; 
+            padding-top: 1.5em; 
+            background: #f8f8f8;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        #scatterplot-nav > span {
+            flex: 0 0 100%;
+        }
+
+        #scatterplot-nav > form {
+            display: flex;
+            flex: 1;
+            gap: 1em;
+        }
+
+        #scatterplot-nav > form > label {
+            flex: 0 33%;
+        }
+
+        #scatterplot-nav > form > select {
+            flex: 1;
+        }
+        """
+  in
+    Html.node "style" [] [ Html.text styles ]
+
+change : ((LungCancerPrediction -> Float, String) -> Msg) -> String -> Msg
+change msg value =
+    case value of
+        "Nummer des Patienten" -> msg (.index, "Nummer des Patienten")
+        "Alter des Patienten" -> msg (.age, "Alter des Patienten")
+        "Luftverschmutzung" -> msg (.airPollution, "Luftverschmutzung")
+        "Alkoholkonsum" -> msg (.alcoholUse, "Alkoholkonsum")
+        "Stauballergie" -> msg (.dustAllergy, "Stauballergie")
+        "genetisches Risiko" -> msg (.geneticRisk, "genetisches Risiko")
+        "Fettleibigkeit" -> msg (.obesity, "Fettleibigkeit")
+        "Rauchen" -> msg (.smoking, "Rauchen")
+        _ -> msg (.obesity, "Fettleibigkeit")
+
+
+nav : Data -> Html Msg
+nav data = Html.nav
+    [ Html.Attributes.id "scatterplot-nav" ]
+    [ Html.span [] [ Html.text "Wechseln Sie die X- und Y-Achsen, um verschiedene Kombinationen zu erkunden." ]
+    , Html.form
+        []
+        [ Html.label [] [ Html.text "X-Achse:" ]
+        , Html.select
+            [ Html.Events.onInput (change ChangeX) ]
+            [ Html.optgroup 
+                [ Html.Attributes.attribute "label" "Suchtmittel" ] 
+                [ Html.option
+                    [ Html.Attributes.value "Rauchen"
+                    , Html.Attributes.selected (data.xName == "Rauchen") ]
+                    [ Html.text "Tabakrauchen" ]
+                , Html.option
+                    [ Html.Attributes.value "Alkoholkonsum"
+                    , Html.Attributes.selected (data.xName == "Alkoholkonsum") ]
+                    [ Html.text "Alkoholkonsum" ]
+                ]
+            , Html.optgroup 
+                [ Html.Attributes.attribute "label" "Sonstiges" ] 
+                [ Html.option
+                    [ Html.Attributes.value "genetisches Risiko"
+                    , Html.Attributes.selected (data.xName == "genetisches Risiko") ]
+                    [ Html.text "Genetisches Risiko" ]
+                , Html.option
+                    [ Html.Attributes.value "Fettleibigkeit"
+                    , Html.Attributes.selected (data.xName == "Fettleibigkeit") ]
+                    [ Html.text "Adipositas" ]
+                , Html.option
+                    [ Html.Attributes.value "Nummer des Patienten"
+                    , Html.Attributes.selected (data.xName == "Nummer des Patienten") ]
+                    [ Html.text "Patientennummer" ]
+                 , Html.option
+                    [ Html.Attributes.value "Alter des Patienten"
+                    , Html.Attributes.selected (data.xName == "Alter des Patienten") ]
+                    [ Html.text "Alter des Patienten" ]
+                ]
+            , Html.optgroup 
+                [ Html.Attributes.attribute "label" "Äußerliche Einflüsse" ] 
+                [   Html.option
+                    [ Html.Attributes.value "Stauballergie"
+                    , Html.Attributes.selected (data.xName == "Stauballergie") ]
+                    [ Html.text "Hausstaubmilbenallergie" ]
+                , Html.option
+                    [ Html.Attributes.value "Luftverschmutzung"
+                    , Html.Attributes.selected (data.xName == "Luftverschmutzung") ]
+                    [ Html.text "Luftverschmutzung" ]
+                ]
+        ]
+    ]
+    , Html.form
+        []
+        [ Html.label [] [ Html.text "Y-Achse:" ]
+        , Html.select
+            [ Html.Events.onInput (change ChangeY) ]
+            [ Html.optgroup 
+                [ Html.Attributes.attribute "label" "Suchtmittel" ] 
+                [ Html.option
+                    [ Html.Attributes.value "Rauchen"
+                    , Html.Attributes.selected (data.yName == "Rauchen") ]
+                    [ Html.text "Tabakrauchen" ]
+                , Html.option
+                    [ Html.Attributes.value "Alkoholkonsum"
+                    , Html.Attributes.selected (data.yName == "Alkoholkonsum") ]
+                    [ Html.text "Alkoholkonsum" ]
+                , Html.option
+                    [ Html.Attributes.value "Alter des Patienten"
+                    , Html.Attributes.selected (data.yName == "Alter des Patienten") ]
+                    [ Html.text "Alter des Patienten" ]
+                ]
+            , Html.optgroup 
+                [ Html.Attributes.attribute "label" "Sonstiges" ] 
+                [ Html.option
+                    [ Html.Attributes.value "genetisches Risiko"
+                    , Html.Attributes.selected (data.yName == "genetisches Risiko") ]
+                    [ Html.text "Genetisches Risiko" ]
+                , Html.option
+                    [ Html.Attributes.value "Fettleibigkeit"
+                    , Html.Attributes.selected (data.yName == "Fettleibigkeit") ]
+                    [ Html.text "Adipositas" ]
+                , Html.option
+                    [ Html.Attributes.value "Nummer des Patienten"
+                    , Html.Attributes.selected (data.yName == "Nummer des Patienten") ]
+                    [ Html.text "Patientennummer" ]
+                 , Html.option
+                    [ Html.Attributes.value "Alter des Patienten"
+                    , Html.Attributes.selected (data.xName == "Alter des Patienten") ]
+                    [ Html.text "Alter des Patienten" ]
+                ]
+            , Html.optgroup 
+                [ Html.Attributes.attribute "label" "Äußerliche Einflüsse" ] 
+                [   Html.option
+                    [ Html.Attributes.value "Stauballergie"
+                    , Html.Attributes.selected (data.yName == "Stauballergie") ]
+                    [ Html.text "Hausstaubmilbenallergie" ]
+                , Html.option
+                    [ Html.Attributes.value "Luftverschmutzung"
+                    , Html.Attributes.selected (data.yName == "Luftverschmutzung") ]
+                    [ Html.text "Luftverschmutzung" ]
+                ]
+            ]
+        ]
+    ]
+
+
 view : Model -> Html Msg
 view model =
     case model of
         Error ->
-            Html.text "Unfortunately scatterplot Chocolatebar can not be open."
+            Html.text "Leider konnte der Scatterplot der Lungenkrebspatienten bezüglich ihrer Attribute nicht geladen werden."
 
         Loading ->
-            Html.text "Loading Chocolatebar"
+            Html.span
+                []
+                [ Html.text "Lade Scatterplot der Lungenkrebspatienten... "
+                , FontAwesome.view (FontAwesome.styled [ FontAwesome.Attributes.spin ] FontAwesome.Solid.spinner)
+                ]
 
         Success l ->
-            let
-                lungCancerPrediction =
-                    filterReducedlungCancerPrediction l.data .company l.xFunction l.yFunction l.xName l.yName
+            --let
+              --  lungCancerPrediction : XYData
+              --  lungCancerPrediction =
+              --      filterReducedLungCancerPrediction l.data .gender l.xFunction l.yFunction l.xName l.yName
 
-            in 
-            Html.div []
-                [
-                    ul[][
-                        li[][
-                            Html.text <| "Change the x axis, to explore different combinations"
-                            , Html.button [onClick (ChangeX (.review_date, "Review-Datum"))] [Html.text "Review-Datum"]
-                            , Html.button [onClick (ChangeX (.salt, "Kakaoanteil"))] [Html.text "Kakaoanteil"]
-                            , Html.button [onClick (ChangeX (.rating, "Bewertung"))] [Html.text "Bewertung"]
-                            , Html.button [onClick (ChangeX (.beans, "Kakaobohnen"))] [Html.text "Kakaobohnen"]
-                            , Html.button [onClick (ChangeX (.cocoa_butter, "Kakaobutter"))] [Html.text "Kakaobutter"]
-                            , Html.button [onClick (ChangeX (.sugar, "Zucker"))] [Html.text "Zucker"]
-                            , Html.button [onClick (ChangeX (.sweetener_without_sugar, "Süßungsmittel"))] [Html.text "Süßungsmittel"]
-                            , Html.button [onClick (ChangeX (.lecithin, "Lecithin"))] [Html.text "Lecithin"]
-                       ]
-                    ]
-                    , ul[][
-                        li[][
-                            Html.text <| "Change the y axis, to explore different combinations"
-                            , Html.button [onClick (ChangeY (.review_date, "Review-Datum"))] [Html.text "Review-Datum"]
-                            , Html.button [onClick (ChangeY (.salt, "Kakaoanteil"))] [Html.text "Kakaoanteil"]
-                            , Html.button [onClick (ChangeY (.rating, "Bewertung"))] [Html.text "Bewertung"]
-                            , Html.button [onClick (ChangeY (.beans, "Kakaobohnen"))] [Html.text "Kakaobohnen"]
-                            , Html.button [onClick (ChangeY (.cocoa_butter, "Kakaobutter"))] [Html.text "Kakaobutter"]
-                            , Html.button [onClick (ChangeY (.sugar, "Zucker"))] [Html.text "Zucker"]
-                            , Html.button [onClick (ChangeY (.sweetener_without_sugar, "Süßungsmittel"))] [Html.text "Süßungsmittel"]
-                            , Html.button [onClick (ChangeY (.lecithin, "Lecithin"))] [Html.text "Lecithin"]
-                       ]
-                    ]
-                    ,   scatterplot lungCancerPrediction
+            --in 
+            Html.div
+                []
+                [ stylesheet
+                , nav l
+                , scatterplot l
                 ]
