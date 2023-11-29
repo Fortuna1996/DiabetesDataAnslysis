@@ -18,12 +18,13 @@
             "ericgj/elm-csv-decode": "2.0.1",
             "f0i/statistics": "4.0.0",
             "folkertdev/one-true-path-experiment": "6.0.0",
+            "folkertdev/svg-path-lowlevel": "4.0.1",
             "gampleman/elm-visualization": "2.3.0",
+            "lattyware/elm-fontawesome": "6.0.0",
             "lovasoa/elm-csv": "1.1.7",
             "zwilias/elm-rosetree": "1.5.0"
         },
         "indirect": {
-            "allo-media/canopy": "1.0.0",
             "elm/bytes": "1.0.8",
             "elm/file": "1.0.5",
             "elm/parser": "1.1.0",
@@ -32,7 +33,6 @@
             "elm/url": "1.0.0",
             "elm/virtual-dom": "1.0.3",
             "folkertdev/elm-deque": "3.0.1",
-            "folkertdev/svg-path-lowlevel": "4.0.1",
             "ianmackenzie/elm-1d-parameter": "1.0.1",
             "ianmackenzie/elm-float-extra": "1.1.0",
             "ianmackenzie/elm-geometry": "3.9.1",
@@ -50,6 +50,8 @@
     },
     "test-dependencies": {
         "direct": {},
-        "indirect": {}
+        "indirect": {
+            "allo-media/canopy": "1.0.0"
+        }
     }
 }
