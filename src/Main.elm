@@ -256,7 +256,10 @@ body model =
                         , Html.text "Neugierig geworden? Finde mehr heraus! "
                         , Html.br [] []
                         , Html.br [] []
-                        , Html.text "(Unten rechts stehen der Quellcode und die Daten. Beim Anklicken der jeweiligen Wörter werden genauer Informationen erhalten.) "
+                        , Html.text "Hinweis: Bezüglich des Wortes Lungenkrebspatienten wird das generische Maskulinum verwendet und bezieht sich auf alle Geschlechter. Somit ist eine Benachteiligung jeglichen Geschlechts ausgeschlossen."
+                        , Html.br [] []
+                        , Html.br [] []
+                        , Html.text "(Unten rechts stehen der Quellcode und die Daten. Beim Anklicken der jeweiligen Wörter werden genauere Informationen erhalten.) "
                         ]
 
                         
@@ -300,7 +303,7 @@ footer model =
         [ Html.p
             []
             [ FontAwesome.view FontAwesome.Solid.copyright
-            , Html.text " 2022"
+            , Html.text " 2023"
             ]
         , Html.nav
             []
@@ -370,7 +373,11 @@ update msg model =
                                                         dustAllergy=x.dustAllergy,
                                                         geneticRisk=x.geneticRisk,
                                                         obesity=x.obesity,
-                                                        smoking=x.smoking
+                                                        smoking=x.smoking,
+                                                        passiveSmoker=x.passiveSmoker,
+                                                        chronicLungDisease=x.chronicLungDisease,
+                                                        balancedDiet=x.balancedDiet,
+                                                        chestPain=x.chestPain
                                                     }) chosen
                             newmodel = {spm|chosendata=newChosen}
 
