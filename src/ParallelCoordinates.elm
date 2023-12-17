@@ -435,9 +435,9 @@ change msg value =
         "Alkoholkonsum" -> msg (.alcoholUse, "Alkoholkonsum")
         "Stauballergie" -> msg (.dustAllergy, "Stauballergie")
         "genetisches Risiko" -> msg (.geneticRisk, "genetisches Risiko")
-        "Fettleibigkeit" -> msg (.obesity, "Fettleibigkeit")
+        "Adipositas" -> msg (.obesity, "Adipositas")
         "Rauchen" -> msg (.smoking, "Rauchen")
-        _ -> msg (.obesity, "Fettleibigkeit")
+        _ -> msg (.obesity, "Adipositas")
 
 
 nav : Data -> Html Msg
@@ -480,8 +480,8 @@ nav data = Html.nav
                     , Html.Attributes.selected (data.firstNAME == "genetisches Risiko") ]
                     [ Html.text "Genetisches Risiko" ]
                 , Html.option
-                    [ Html.Attributes.value "Fettleibigkeit"
-                    , Html.Attributes.selected (data.firstNAME == "Fettleibigkeit") ]
+                    [ Html.Attributes.value "Adipositas"
+                    , Html.Attributes.selected (data.firstNAME == "Adipositas") ]
                     [ Html.text "Adipositas" ]
                 , Html.option
                     [ Html.Attributes.value "Nummer des Patienten"
@@ -541,8 +541,8 @@ nav data = Html.nav
                     , Html.Attributes.selected (data.firstNAME == "genetisches Risiko") ]
                     [ Html.text "Genetisches Risiko" ]
                 , Html.option
-                    [ Html.Attributes.value "Fettleibigkeit"
-                    , Html.Attributes.selected (data.firstNAME == "Fettleibigkeit") ]
+                    [ Html.Attributes.value "Adipositas"
+                    , Html.Attributes.selected (data.firstNAME == "Adipositas") ]
                     [ Html.text "Adipositas" ]
                 , Html.option
                     [ Html.Attributes.value "Nummer des Patienten"
@@ -602,8 +602,8 @@ nav data = Html.nav
                     , Html.Attributes.selected (data.firstNAME == "genetisches Risiko") ]
                     [ Html.text "Genetisches Risiko" ]
                 , Html.option
-                    [ Html.Attributes.value "Fettleibigkeit"
-                    , Html.Attributes.selected (data.firstNAME == "Fettleibigkeit") ]
+                    [ Html.Attributes.value "Adipositas"
+                    , Html.Attributes.selected (data.firstNAME == "Adipositas") ]
                     [ Html.text "Adipositas" ]
                 , Html.option
                     [ Html.Attributes.value "Nummer des Patienten"
@@ -663,8 +663,8 @@ nav data = Html.nav
                     , Html.Attributes.selected (data.firstNAME == "genetisches Risiko") ]
                     [ Html.text "Genetisches Risiko" ]
                 , Html.option
-                    [ Html.Attributes.value "Fettleibigkeit"
-                    , Html.Attributes.selected (data.firstNAME == "Fettleibigkeit") ]
+                    [ Html.Attributes.value "Adipositas"
+                    , Html.Attributes.selected (data.firstNAME == "Adipositas") ]
                     [ Html.text "Adipositas" ]
                 , Html.option
                     [ Html.Attributes.value "Nummer des Patienten"
