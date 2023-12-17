@@ -48,6 +48,10 @@ type alias LungCancerPrediction =
     , geneticRisk : Float
     , obesity: Float
     , smoking : Float
+    , passiveSmoker : Float
+    , chronicLungDisease : Float
+    , balancedDiet : Float
+    , chestPain : Float
     }
 type Msg
     = GotText (Result Http.Error String)
@@ -117,6 +121,10 @@ decodingLungCancerPrediction =
                 |> Csv.Decode.andMap (Csv.Decode.field "geneticRisk"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "obesity"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "smoking"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "passiveSmoker"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "chronicLungDisease"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "balancedDiet"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "chestPain"(String.toFloat >> Result.fromMaybe "error parsing string"))
 
             )
             -- hinzufügen update : Msg
@@ -128,7 +136,7 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = lungCancerPredictionList [ fullText ], xFunction = .airPollution, yFunction = .alcoholUse, xName = "Luftverschmutzung.", yName = "Alkoholkonsum", chosendata = Nothing}, Cmd.none )
+                    ( Success <| { data = lungCancerPredictionList [ fullText ], xFunction = .airPollution, yFunction = .alcoholUse, xName = "Luftverschmutzung", yName = "Alkoholkonsum", chosendata = Nothing}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
@@ -522,15 +530,15 @@ change msg value =
         "Alkoholkonsum" -> msg (.alcoholUse, "Alkoholkonsum")
         "Stauballergie" -> msg (.dustAllergy, "Stauballergie")
         "genetisches Risiko" -> msg (.geneticRisk, "genetisches Risiko")
-        "Fettleibigkeit" -> msg (.obesity, "Fettleibigkeit")
+        "Adipositas" -> msg (.obesity, "Adipositas")
         "Rauchen" -> msg (.smoking, "Rauchen")
-        _ -> msg (.obesity, "Fettleibigkeit")
+        _ -> msg (.obesity, "Adipositas")
 
 
 nav : Data -> Html Msg
 nav data = Html.nav
     [ Html.Attributes.id "scatterplot-nav" ]
-    [ Html.span [] [ Html.text "Wechseln Sie die X- und Y-Achsen, um verschiedene Kombinationen zu erkunden." ]
+    [ Html.span [] [ Html.text "Nutze die Dropdown-Menüs, um die x- und y-Achsen zu wechseln." ]
     , Html.form
         []
         [ Html.label [] [ Html.text "X-Achse:" ]
@@ -554,8 +562,8 @@ nav data = Html.nav
                     , Html.Attributes.selected (data.xName == "genetisches Risiko") ]
                     [ Html.text "Genetisches Risiko" ]
                 , Html.option
-                    [ Html.Attributes.value "Fettleibigkeit"
-                    , Html.Attributes.selected (data.xName == "Fettleibigkeit") ]
+                    [ Html.Attributes.value "Adipositas"
+                    , Html.Attributes.selected (data.xName == "Adipositas") ]
                     [ Html.text "Adipositas" ]
                 , Html.option
                     [ Html.Attributes.value "Nummer des Patienten"
@@ -594,10 +602,6 @@ nav data = Html.nav
                     [ Html.Attributes.value "Alkoholkonsum"
                     , Html.Attributes.selected (data.yName == "Alkoholkonsum") ]
                     [ Html.text "Alkoholkonsum" ]
-                , Html.option
-                    [ Html.Attributes.value "Alter des Patienten"
-                    , Html.Attributes.selected (data.yName == "Alter des Patienten") ]
-                    [ Html.text "Alter des Patienten" ]
                 ]
             , Html.optgroup 
                 [ Html.Attributes.attribute "label" "Sonstiges" ] 
@@ -606,8 +610,8 @@ nav data = Html.nav
                     , Html.Attributes.selected (data.yName == "genetisches Risiko") ]
                     [ Html.text "Genetisches Risiko" ]
                 , Html.option
-                    [ Html.Attributes.value "Fettleibigkeit"
-                    , Html.Attributes.selected (data.yName == "Fettleibigkeit") ]
+                    [ Html.Attributes.value "Adipositas"
+                    , Html.Attributes.selected (data.yName == "Adipositas") ]
                     [ Html.text "Adipositas" ]
                 , Html.option
                     [ Html.Attributes.value "Nummer des Patienten"
