@@ -142,11 +142,11 @@ nav data = Html.nav
             [ Html.option
                 [ Html.Attributes.value "10"
                 , Html.Attributes.selected (data.gr == "10") ]
-                [ Html.text "Suchtmittel" ]
+                [ Html.text "Körper" ]
             , Html.option
                 [ Html.Attributes.value "11"
                 , Html.Attributes.selected (data.gr == "11") ]
-                [ Html.text "Äußerliche Einflüsse" ]
+                [ Html.text "Rauchen" ]
             , Html.option
                 [ Html.Attributes.value "12"
                 , Html.Attributes.selected (data.gr == "12") ]
@@ -200,7 +200,7 @@ view model =
                     , nav l   
                     , p
                         []
-                        [ text "Anzahl der Lungenkrebspatient:innen: "
+                        [ text "Anzahl der Lungenkrebspatienten: "
                         , text <| String.fromInt numberStudies
                         ]
                     , stickfigureplot filteredLung l.chosendata l.len l.gr
@@ -629,9 +629,9 @@ stickfigure scaleX scaleY lange xfunc yfunc   (umin,umax) (vmin,vmax) (pmin,pmax
 
         pDegree =  degf sacC.dustAllergy (pmin,pmax)
 
-        qDegree = degf sacC.geneticRisk (qmin,qmax)
+        qDegree = degf sacC.index (qmin,qmax)
 
-        zDegree = degf sacC.obesity (zmin,zmax)
+        zDegree = degf sacC.age (zmin,zmax)
 
     in
         g [ class 
@@ -701,9 +701,9 @@ drawChosenStickfigure scaleX scaleY lange xfunc yfunc   (umin,umax) (vmin,vmax) 
 
                 pDegree =  degf sacC.dustAllergy (pmin,pmax)
 
-                qDegree = degf sacC.geneticRisk (qmin,qmax)
+                qDegree = degf sacC.index (qmin,qmax)
 
-                zDegree = degf sacC.obesity (zmin,zmax)
+                zDegree = degf sacC.age (zmin,zmax)
 
             in        
                 [g [ class 
