@@ -1,2 +1,2 @@
-# ChocolateBarVisualization
+# LungCancerPrediction
  
