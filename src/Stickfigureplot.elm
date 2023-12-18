@@ -140,16 +140,16 @@ nav data = Html.nav
         , Html.select
             [ Html.Events.onInput ChangeGrade ]
             [ Html.option
-                [ Html.Attributes.value "10"
-                , Html.Attributes.selected (data.gr == "10") ]
+                [ Html.Attributes.value "Körper"
+                , Html.Attributes.selected (data.gr == "Körper") ]
                 [ Html.text "Körper" ]
             , Html.option
-                [ Html.Attributes.value "11"
-                , Html.Attributes.selected (data.gr == "11") ]
+                [ Html.Attributes.value "Rauchen"
+                , Html.Attributes.selected (data.gr == "Rauchen") ]
                 [ Html.text "Rauchen" ]
             , Html.option
-                [ Html.Attributes.value "12"
-                , Html.Attributes.selected (data.gr == "12") ]
+                [ Html.Attributes.value "Sonstiges"
+                , Html.Attributes.selected (data.gr == "Sonstiges") ]
                 [ Html.text "Sonstiges" ]
             ]
         ]
@@ -206,7 +206,7 @@ view model =
                     , stickfigureplot filteredLung l.chosendata l.len l.gr
                 ]
 gr : String
-gr = "12"
+gr = "Sonstiges"
 
 
 
@@ -307,7 +307,7 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = lungCancerPredictionList [ fullText ], len=8, gr="10", chosendata = Nothing}, Cmd.none )
+                    ( Success <| { data = lungCancerPredictionList [ fullText ], len=8, gr="Körper", chosendata = Nothing}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
