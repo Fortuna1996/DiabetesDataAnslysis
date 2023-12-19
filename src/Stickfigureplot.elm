@@ -148,9 +148,9 @@ nav data = Html.nav
                 , Html.Attributes.selected (data.gr == "Rauchen") ]
                 [ Html.text "Rauchen" ]
             , Html.option
-                [ Html.Attributes.value "Sonstiges"
-                , Html.Attributes.selected (data.gr == "Sonstiges") ]
-                [ Html.text "Sonstiges" ]
+                [ Html.Attributes.value "Erkrankung"
+                , Html.Attributes.selected (data.gr == "Erkrankung") ]
+                [ Html.text "Erkrankung" ]
             ]
         ]
     , Html.form
@@ -206,7 +206,7 @@ view model =
                     , stickfigureplot filteredLung l.chosendata l.len l.gr
                 ]
 gr : String
-gr = "Sonstiges"
+gr = "Erkrankung"
 
 
 
