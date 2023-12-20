@@ -403,8 +403,8 @@ stylesheet =
 
         #parallel-nav > form > fieldset > button {
             border-radius: 50%;
-            background: #55bfff3b;
-            border: 2px solid #55bfff;
+            background: #a255ff3b;
+            border: 2px solid #a255ff;
             transition: background 0.2s ease;
         }
 
