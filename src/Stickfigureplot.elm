@@ -564,7 +564,7 @@ stickfigureplot listlung mchosen len risk =
                 ]
                 [ text (if risk == "Körper" then "Adipositas"
                 else if risk == "Rauchen" then "Tabakrauchen"
-                else "Chronisch obstruktive Lungenerkrankung")] -- x -- xmts
+                else "Brustschmerzen")] -- x -- xmts
                 ]
     -- plot y axis             
          ,g[transform [Translate(60) (60)]]
@@ -581,7 +581,7 @@ stickfigureplot listlung mchosen len risk =
                 ]
                 [ text (if risk == "Körper" then "Ausgewogene Ernährung"
                 else if risk == "Rauchen" then "Passives Rauchen"
-                else "Brustschmerzen") ] -- y -- xmts
+                else "Chronisch obstruktive Lungenerkrankung") ] -- y -- xmts
              ]
     -- plot points and description     
          ,g [ transform [ Translate padding padding ] ]
