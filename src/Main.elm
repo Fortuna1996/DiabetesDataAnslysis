@@ -95,7 +95,7 @@ style =
             display: flex;
             z-index: 10;
             flex: 0;
-            background: #55bfff;
+            background: #a255ff;
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
         }
 
@@ -159,14 +159,14 @@ style =
             border-radius: 1.25em;
             margin-right: 1em;
             padding: 0 1em;
-            background: #55bfff3b;
-            border: 2px solid #55bfff;
+            background: #a255ff3b;
+            border: 2px solid #a255ff;
             font-size: 0.9em;
             transition: background 0.2s ease;
         }
 
         #start-screen-nav > button:hover {
-            background: #55bfff;
+            background: #a255ff;
         }
 
         #footer {
