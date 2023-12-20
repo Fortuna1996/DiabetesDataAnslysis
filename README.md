@@ -8,7 +8,7 @@
 # Datenbereitstellung
   https://www.kaggle.com/datasets/thedevastator/cancer-patients-and-air-pollution-a-new-link/data?select=cancer+patient+data+sets.csv
 # Link zur Webseite
-  https://fortuna1996.github.io/LungCancerPrediction/
+  
 # Verwendete Visualisierungsmethoden
   - Scatterplot
   - Parallele Koordinaten
