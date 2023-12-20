@@ -28,14 +28,14 @@ import FontAwesome.Attributes
 
 type alias Data =
     { data : List LungCancerPrediction
-    , firstFUNCTION : LungCancerPrediction -> Float
-    , secondFUNCTION : LungCancerPrediction -> Float
-    , thirdFUNCTION : LungCancerPrediction -> Float
-    , fourthFUNCTION : LungCancerPrediction -> Float
-    , firstNAME : String
-    , secondNAME : String
-    , thirdNAME : String
-    , fourthNAME : String
+    , firstFunction : LungCancerPrediction -> Float
+    , secondFunction : LungCancerPrediction -> Float
+    , thirdFunction : LungCancerPrediction -> Float
+    , fourthFunction : LungCancerPrediction -> Float
+    , firstName : String
+    , secondName : String
+    , thirdName : String
+    , fourthName : String
     }
 
 type Model
@@ -101,10 +101,10 @@ list =
 
 type Msg 
     = GotText (Result Http.Error String)   
-    | ChangeONE (LungCancerPrediction -> Float,String)     
-    | ChangeTWO (LungCancerPrediction -> Float,String) 
-    | ChangeTHREE (LungCancerPrediction -> Float,String)
-    | ChangeFOUR (LungCancerPrediction -> Float,String)
+    | ChangeOne (LungCancerPrediction -> Float,String)     
+    | ChangeTwo (LungCancerPrediction -> Float,String) 
+    | ChangeThree (LungCancerPrediction -> Float,String)
+    | ChangeFour (LungCancerPrediction -> Float,String)
     | MoveAxisUp Int
     
 csvStringToData : String -> List LungCancerPrediction
@@ -134,35 +134,35 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = lungCancerPredictionList [ fullText ], firstFUNCTION = .airPollution, secondFUNCTION = .alcoholUse, thirdFUNCTION = .dustAllergy, fourthFUNCTION = .geneticRisk, firstNAME = "Luftverschmutzung", secondNAME = "Alkoholkonsum", thirdNAME = "Stauballergie", fourthNAME = "genetisches Risiko"}, Cmd.none )
+                    ( Success <| { data = lungCancerPredictionList [ fullText ], firstFunction = .airPollution, secondFunction = .alcoholUse, thirdFunction = .dustAllergy, fourthFunction = .geneticRisk, firstName = "Luftverschmutzung", secondName = "Alkoholkonsum", thirdName = "Stauballergie", fourthName = "genetisches Risiko"}, Cmd.none )
 
                 Err  _ ->
                     ( model, Cmd.none )
 
-        ChangeONE (x, a) ->
+        ChangeOne (x, a) ->
             case model of 
                 Success m ->
-                    ( Success <| { data = m.data, firstFUNCTION = x, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = m.fourthFUNCTION, firstNAME = a, secondNAME = m.secondNAME, thirdNAME = m.thirdNAME, fourthNAME = m.fourthNAME}, Cmd.none )
+                    ( Success <| { data = m.data, firstFunction = x, secondFunction = m.secondFunction, thirdFunction = m.thirdFunction, fourthFunction = m.fourthFunction, firstName = a, secondName = m.secondName, thirdName = m.thirdName, fourthName = m.fourthName}, Cmd.none )
                 _ ->
                     ( model, Cmd.none )
-        ChangeTWO (y, a) ->
+        ChangeTwo (y, a) ->
             case model of
                 Success m ->
-                    ( Success <| { data = m.data, firstFUNCTION = m.firstFUNCTION, secondFUNCTION = y, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = m.fourthFUNCTION , firstNAME = m.firstNAME, secondNAME = a, thirdNAME = m.thirdNAME, fourthNAME = m.fourthNAME}, Cmd.none )
+                    ( Success <| { data = m.data, firstFunction = m.firstFunction, secondFunction = y, thirdFunction = m.thirdFunction, fourthFunction = m.fourthFunction , firstName = m.firstName, secondName = a, thirdName = m.thirdName, fourthName = m.fourthName}, Cmd.none )
 
                 _ ->
                     ( model, Cmd.none )
-        ChangeTHREE (z, a) ->
+        ChangeThree (z, a) ->
             case model of
                 Success m ->
-                    ( Success <| { data = m.data, firstFUNCTION = m.firstFUNCTION, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = z, fourthFUNCTION = m.fourthFUNCTION, firstNAME = m.firstNAME, secondNAME = m.secondNAME, thirdNAME = a, fourthNAME = m.fourthNAME}, Cmd.none )
+                    ( Success <| { data = m.data, firstFunction = m.firstFunction, secondFunction = m.secondFunction, thirdFunction = z, fourthFunction = m.fourthFunction, firstName = m.firstName, secondName = m.secondName, thirdName = a, fourthName = m.fourthName}, Cmd.none )
 
                 _ ->
                     ( model, Cmd.none )
-        ChangeFOUR (c, a) ->
+        ChangeFour (c, a) ->
             case model of
                 Success m ->
-                    ( Success <| { data = m.data, firstFUNCTION = m.firstFUNCTION, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = c , firstNAME = m.firstNAME, secondNAME = m.secondNAME, thirdNAME = m.thirdNAME, fourthNAME = a}, Cmd.none )
+                    ( Success <| { data = m.data, firstFunction = m.firstFunction, secondFunction = m.secondFunction, thirdFunction = m.thirdFunction, fourthFunction = c , firstName = m.firstName, secondName = m.secondName, thirdName = m.thirdName, fourthName = a}, Cmd.none )
 
                 _ ->
                     ( model, Cmd.none )   
@@ -171,11 +171,11 @@ update msg model =
                 Success m ->
                     case num of
                         2 ->
-                            ( Success <| { m | firstFUNCTION = m.secondFUNCTION, secondFUNCTION = m.firstFUNCTION, firstNAME = m.secondNAME, secondNAME = m.firstNAME}, Cmd.none )
+                            ( Success <| { m | firstFunction = m.secondFunction, secondFunction = m.firstFunction, firstName = m.secondName, secondName = m.firstName}, Cmd.none )
                         3 ->
-                            ( Success <| { m | secondFUNCTION = m.thirdFUNCTION, thirdFUNCTION = m.secondFUNCTION, secondNAME = m.thirdNAME, thirdNAME = m.secondNAME}, Cmd.none )
+                            ( Success <| { m | secondFunction = m.thirdFunction, thirdFunction = m.secondFunction, secondName = m.thirdName, thirdName = m.secondName}, Cmd.none )
                         4 ->
-                            ( Success <| { m | thirdFUNCTION = m.fourthFUNCTION, fourthFUNCTION = m.thirdFUNCTION, thirdNAME = m.fourthNAME, fourthNAME = m.thirdNAME}, Cmd.none )
+                            ( Success <| { m | thirdFunction = m.fourthFunction, fourthFunction = m.thirdFunction, thirdName = m.fourthName, fourthName = m.thirdName}, Cmd.none )
                         _ ->
                             ( model, Cmd.none )     
                 _ ->
@@ -462,46 +462,46 @@ nav data = Html.nav
                 [ FontAwesome.view FontAwesome.Solid.arrowDown ]
             ]
         , Html.select
-            [ Html.Events.onInput (change ChangeONE) ]
+            [ Html.Events.onInput (change ChangeOne) ]
             [ Html.optgroup 
                 [ Html.Attributes.attribute "label" "Suchtmittel" ] 
                 [ Html.option
                     [ Html.Attributes.value "Rauchen"
-                    , Html.Attributes.selected (data.firstNAME == "Rauchen") ]
+                    , Html.Attributes.selected (data.firstName == "Rauchen") ]
                     [ Html.text "Rauchen" ]
                 , Html.option
                     [ Html.Attributes.value "Alkoholkonsum"
-                    , Html.Attributes.selected (data.firstNAME == "Alkoholkonsum") ]
+                    , Html.Attributes.selected (data.firstName == "Alkoholkonsum") ]
                     [ Html.text "Alkoholkonsum" ]
                 ]
             , Html.optgroup 
                 [ Html.Attributes.attribute "label" "Sonstiges" ] 
                 [ Html.option
                     [ Html.Attributes.value "genetisches Risiko"
-                    , Html.Attributes.selected (data.firstNAME == "genetisches Risiko") ]
+                    , Html.Attributes.selected (data.firstName == "genetisches Risiko") ]
                     [ Html.text "Genetisches Risiko" ]
                 , Html.option
                     [ Html.Attributes.value "Adipositas"
-                    , Html.Attributes.selected (data.firstNAME == "Adipositas") ]
+                    , Html.Attributes.selected (data.firstName == "Adipositas") ]
                     [ Html.text "Adipositas" ]
                 , Html.option
                     [ Html.Attributes.value "Nummer des Patienten"
-                    , Html.Attributes.selected (data.firstNAME == "Nummer des Patienten") ]
+                    , Html.Attributes.selected (data.firstName == "Nummer des Patienten") ]
                     [ Html.text "Patientennummer" ]
                 , Html.option
                     [ Html.Attributes.value "Alter des Patienten"
-                    , Html.Attributes.selected (data.firstNAME == "Alter des Patienten") ]
+                    , Html.Attributes.selected (data.firstName == "Alter des Patienten") ]
                     [ Html.text "Alter des Patienten" ]
                 ]
             , Html.optgroup 
                 [ Html.Attributes.attribute "label" "Äußerliche Einflüsse" ] 
                 [   Html.option
                     [ Html.Attributes.value "Stauballergie"
-                    , Html.Attributes.selected (data.firstNAME == "Stauballergie") ]
+                    , Html.Attributes.selected (data.firstName == "Stauballergie") ]
                     [ Html.text "Stauballergie" ]
                 , Html.option
                     [ Html.Attributes.value "Luftverschmutzung"
-                    , Html.Attributes.selected (data.firstNAME == "Luftverschmutzung") ]
+                    , Html.Attributes.selected (data.firstName == "Luftverschmutzung") ]
                     [ Html.text "Luftverschmutzung" ]
                 ]
         ]
@@ -523,46 +523,46 @@ nav data = Html.nav
                 [ FontAwesome.view FontAwesome.Solid.arrowDown ]
             ]
         , Html.select
-            [ Html.Events.onInput (change ChangeTWO) ]
+            [ Html.Events.onInput (change ChangeTwo) ]
             [ Html.optgroup 
                 [ Html.Attributes.attribute "label" "Suchtmittel" ] 
                 [ Html.option
                     [ Html.Attributes.value "Rauchen"
-                    , Html.Attributes.selected (data.firstNAME == "Rauchen") ]
+                    , Html.Attributes.selected (data.secondName == "Rauchen") ]
                     [ Html.text "Rauchen" ]
                 , Html.option
                     [ Html.Attributes.value "Alkoholkonsum"
-                    , Html.Attributes.selected (data.firstNAME == "Alkoholkonsum") ]
+                    , Html.Attributes.selected (data.secondName == "Alkoholkonsum") ]
                     [ Html.text "Alkoholkonsum" ]
                 ]
             , Html.optgroup 
                 [ Html.Attributes.attribute "label" "Sonstiges" ] 
                 [ Html.option
                     [ Html.Attributes.value "genetisches Risiko"
-                    , Html.Attributes.selected (data.firstNAME == "genetisches Risiko") ]
+                    , Html.Attributes.selected (data.secondName == "genetisches Risiko") ]
                     [ Html.text "Genetisches Risiko" ]
                 , Html.option
                     [ Html.Attributes.value "Adipositas"
-                    , Html.Attributes.selected (data.firstNAME == "Adipositas") ]
+                    , Html.Attributes.selected (data.secondName == "Adipositas") ]
                     [ Html.text "Adipositas" ]
                 , Html.option
                     [ Html.Attributes.value "Nummer des Patienten"
-                    , Html.Attributes.selected (data.firstNAME == "Nummer des Patienten") ]
+                    , Html.Attributes.selected (data.secondName == "Nummer des Patienten") ]
                     [ Html.text "Patientennummer" ]
                 , Html.option
                     [ Html.Attributes.value "Alter des Patienten"
-                    , Html.Attributes.selected (data.firstNAME == "Alter des Patienten") ]
+                    , Html.Attributes.selected (data.secondName == "Alter des Patienten") ]
                     [ Html.text "Alter des Patienten" ]
                 ]
             , Html.optgroup 
                 [ Html.Attributes.attribute "label" "Äußerliche Einflüsse" ] 
                 [   Html.option
                     [ Html.Attributes.value "Stauballergie"
-                    , Html.Attributes.selected (data.firstNAME == "Stauballergie") ]
+                    , Html.Attributes.selected (data.secondName == "Stauballergie") ]
                     [ Html.text "Stauballergie" ]
                 , Html.option
                     [ Html.Attributes.value "Luftverschmutzung"
-                    , Html.Attributes.selected (data.firstNAME == "Luftverschmutzung") ]
+                    , Html.Attributes.selected (data.secondName == "Luftverschmutzung") ]
                     [ Html.text "Luftverschmutzung" ]
                 ]
             ]
@@ -584,46 +584,46 @@ nav data = Html.nav
                 [ FontAwesome.view FontAwesome.Solid.arrowDown ]
             ]
         , Html.select
-            [ Html.Events.onInput (change ChangeTHREE) ]
+            [ Html.Events.onInput (change ChangeThree) ]
             [ Html.optgroup 
                 [ Html.Attributes.attribute "label" "Suchtmittel" ] 
                 [ Html.option
                     [ Html.Attributes.value "Rauchen"
-                    , Html.Attributes.selected (data.firstNAME == "Rauchen") ]
+                    , Html.Attributes.selected (data.thirdName == "Rauchen") ]
                     [ Html.text "Rauchen" ]
                 , Html.option
                     [ Html.Attributes.value "Alkoholkonsum"
-                    , Html.Attributes.selected (data.firstNAME == "Alkoholkonsum") ]
+                    , Html.Attributes.selected (data.thirdName == "Alkoholkonsum") ]
                     [ Html.text "Alkoholkonsum" ]
                 ]
             , Html.optgroup 
                 [ Html.Attributes.attribute "label" "Sonstiges" ] 
                 [ Html.option
                     [ Html.Attributes.value "genetisches Risiko"
-                    , Html.Attributes.selected (data.firstNAME == "genetisches Risiko") ]
+                    , Html.Attributes.selected (data.thirdName == "genetisches Risiko") ]
                     [ Html.text "Genetisches Risiko" ]
                 , Html.option
                     [ Html.Attributes.value "Adipositas"
-                    , Html.Attributes.selected (data.firstNAME == "Adipositas") ]
+                    , Html.Attributes.selected (data.thirdName == "Adipositas") ]
                     [ Html.text "Adipositas" ]
                 , Html.option
                     [ Html.Attributes.value "Nummer des Patienten"
-                    , Html.Attributes.selected (data.firstNAME == "Nummer des Patienten") ]
+                    , Html.Attributes.selected (data.thirdName == "Nummer des Patienten") ]
                     [ Html.text "Patientennummer" ]
                 , Html.option
                     [ Html.Attributes.value "Alter des Patienten"
-                    , Html.Attributes.selected (data.firstNAME == "Alter des Patienten") ]
+                    , Html.Attributes.selected (data.thirdName == "Alter des Patienten") ]
                     [ Html.text "Alter des Patienten" ]
                 ]
             , Html.optgroup 
                 [ Html.Attributes.attribute "label" "Äußerliche Einflüsse" ] 
                 [   Html.option
                     [ Html.Attributes.value "Stauballergie"
-                    , Html.Attributes.selected (data.firstNAME == "Stauballergie") ]
+                    , Html.Attributes.selected (data.thirdName == "Stauballergie") ]
                     [ Html.text "Stauballergie" ]
                 , Html.option
                     [ Html.Attributes.value "Luftverschmutzung"
-                    , Html.Attributes.selected (data.firstNAME == "Luftverschmutzung") ]
+                    , Html.Attributes.selected (data.thirdName == "Luftverschmutzung") ]
                     [ Html.text "Luftverschmutzung" ]
                 ]
             ]
@@ -632,7 +632,7 @@ nav data = Html.nav
         []
         [ Html.label [] [ Html.text "4. Achse:" ]
         , Html.fieldset
-            [ Html.Events.onInput (change ChangeFOUR) ]
+            [ Html.Events.onInput (change ChangeFour) ]
             [ Html.button
                 [ onClick (MoveAxisUp 4)
                 , Html.Attributes.type_ "button"
@@ -650,41 +650,41 @@ nav data = Html.nav
                 [ Html.Attributes.attribute "label" "Suchtmittel" ] 
                 [ Html.option
                     [ Html.Attributes.value "Rauchen"
-                    , Html.Attributes.selected (data.firstNAME == "Rauchen") ]
+                    , Html.Attributes.selected (data.fourthName == "Rauchen") ]
                     [ Html.text "Rauchen" ]
                 , Html.option
                     [ Html.Attributes.value "Alkoholkonsum"
-                    , Html.Attributes.selected (data.firstNAME == "Alkoholkonsum") ]
+                    , Html.Attributes.selected (data.fourthName == "Alkoholkonsum") ]
                     [ Html.text "Alkoholkonsum" ]
                 ]
             , Html.optgroup 
                 [ Html.Attributes.attribute "label" "Sonstiges" ] 
                 [ Html.option
                     [ Html.Attributes.value "genetisches Risiko"
-                    , Html.Attributes.selected (data.firstNAME == "genetisches Risiko") ]
+                    , Html.Attributes.selected (data.fourthName == "genetisches Risiko") ]
                     [ Html.text "Genetisches Risiko" ]
                 , Html.option
                     [ Html.Attributes.value "Adipositas"
-                    , Html.Attributes.selected (data.firstNAME == "Adipositas") ]
+                    , Html.Attributes.selected (data.fourthName == "Adipositas") ]
                     [ Html.text "Adipositas" ]
                 , Html.option
                     [ Html.Attributes.value "Nummer des Patienten"
-                    , Html.Attributes.selected (data.firstNAME == "Nummer des Patienten") ]
+                    , Html.Attributes.selected (data.fourthName == "Nummer des Patienten") ]
                     [ Html.text "Patientennummer" ]
                 , Html.option
                     [ Html.Attributes.value "Alter des Patienten"
-                    , Html.Attributes.selected (data.firstNAME == "Alter des Patienten") ]
+                    , Html.Attributes.selected (data.fourthName == "Alter des Patienten") ]
                     [ Html.text "Alter des Patienten" ]
                 ]
             , Html.optgroup 
                 [ Html.Attributes.attribute "label" "Äußerliche Einflüsse" ] 
                 [   Html.option
                     [ Html.Attributes.value "Stauballergie"
-                    , Html.Attributes.selected (data.firstNAME == "Stauballergie") ]
+                    , Html.Attributes.selected (data.fourthName == "Stauballergie") ]
                     [ Html.text "Stauballergie" ]
                 , Html.option
                     [ Html.Attributes.value "Luftverschmutzung"
-                    , Html.Attributes.selected (data.firstNAME == "Luftverschmutzung") ]
+                    , Html.Attributes.selected (data.fourthName == "Luftverschmutzung") ]
                     [ Html.text "Luftverschmutzung" ]
                 ]
             ]
@@ -730,7 +730,7 @@ view model =
                             ]
 
                         plotData = 
-                            multiDimDaten l.data l.firstFUNCTION l.secondFUNCTION l.thirdFUNCTION l.fourthFUNCTION .gender l.firstNAME l.secondNAME l.thirdNAME l.fourthNAME       
+                            multiDimDaten l.data l.firstFunction l.secondFunction l.thirdFunction l.fourthFunction .gender l.firstName l.secondName l.thirdName l.fourthName       
                     in
                     Html.div
                         []
