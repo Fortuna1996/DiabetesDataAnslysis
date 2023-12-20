@@ -138,7 +138,7 @@ nav data = Html.nav
         []
         [ Html.label [] [ Html.text "Risiken:" ]
         , Html.select
-            [ Html.Events.onInput ChangeGrade ]
+            [ Html.Events.onInput ChangeRisk ]
             [ Html.option
                 [ Html.Attributes.value "Körper"
                 , Html.Attributes.selected (data.gr == "Körper") ]
@@ -250,7 +250,7 @@ type alias LungCancerPrediction =
 type Msg
     = GotText (Result Http.Error String)
     | ChangeLen (String)
-    | ChangeGrade (String)
+    | ChangeRisk (String)
     | PointChosen (Maybe LungCancerPrediction)
 
 
@@ -317,7 +317,7 @@ update msg model =
                     (Success <| {data = m.data, len = Maybe.withDefault 0 <| String.toFloat v, gr=m.gr, chosendata = m.chosendata}, Cmd.none)
                 _ ->
                     ( model, Cmd.none )
-        ChangeGrade g ->
+        ChangeRisk g ->
             case model of
                 Success m ->
                     (Success <| {data = m.data, len = m.len, gr=g, chosendata = m.chosendata}, Cmd.none)
@@ -422,18 +422,18 @@ wideExtent values =
     in
         result2
 stickfigureplot : List LungCancerPrediction -> Maybe LungCancerPrediction->  Float -> String -> Svg Msg
-stickfigureplot listlung mchosen len grade =
+stickfigureplot listlung mchosen len risk =
 
  -- funktionen und parameter deklarieren
     let
 
         xfunc =
-            case grade of
+            case risk of
                 "Körper" -> .obesity 
                 "Rauchen" -> .smoking
                 _ -> .chronicLungDisease 
         yfunc =
-            case grade of
+            case risk of
                 "Körper" -> .balancedDiet 
                 "Rauchen" ->  .passiveSmoker 
                 _ -> .chestPain 
@@ -562,8 +562,8 @@ stickfigureplot listlung mchosen len grade =
 
                 --, fontWeight FontWeightBold
                 ]
-                [ text (if grade == "Körper" then "Adipositas"
-                else if grade == "Rauchen" then "Tabakrauchen"
+                [ text (if risk == "Körper" then "Adipositas"
+                else if risk == "Rauchen" then "Tabakrauchen"
                 else "Chronisch obstruktive Lungenerkrankung")] -- x -- xmts
                 ]
     -- plot y axis             
@@ -579,8 +579,8 @@ stickfigureplot listlung mchosen len grade =
 
                 --, fontWeight FontWeightBold
                 ]
-                [ text (if grade == "Körper" then "Ausgewogene Ernährung"
-                else if grade == "Rauchen" then "Passives Rauchen"
+                [ text (if risk == "Körper" then "Ausgewogene Ernährung"
+                else if risk == "Rauchen" then "Passives Rauchen"
                 else "Brustschmerzen") ] -- y -- xmts
              ]
     -- plot points and description     
