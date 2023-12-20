@@ -25,6 +25,7 @@ import FontAwesome.Solid
 import FontAwesome.Attributes
 
 
+
 type alias Data =
     { data : List LungCancerPrediction
     , firstFUNCTION : LungCancerPrediction -> Float
@@ -429,7 +430,7 @@ stylesheet =
 change : ((LungCancerPrediction -> Float, String) -> Msg) -> String -> Msg
 change msg value =
     case value of
-        "Nummer des Patienten" -> msg (.index, "Nummer des Patienten")
+        "Patientennummer" -> msg (.index, "Patientennummer")
         "Alter des Patienten" -> msg (.age, "Alter des Patienten")
         "Luftverschmutzung" -> msg (.airPollution, "Luftverschmutzung")
         "Alkoholkonsum" -> msg (.alcoholUse, "Alkoholkonsum")
@@ -467,7 +468,7 @@ nav data = Html.nav
                 [ Html.option
                     [ Html.Attributes.value "Rauchen"
                     , Html.Attributes.selected (data.firstNAME == "Rauchen") ]
-                    [ Html.text "Tabakrauchen" ]
+                    [ Html.text "Rauchen" ]
                 , Html.option
                     [ Html.Attributes.value "Alkoholkonsum"
                     , Html.Attributes.selected (data.firstNAME == "Alkoholkonsum") ]
@@ -497,7 +498,7 @@ nav data = Html.nav
                 [   Html.option
                     [ Html.Attributes.value "Stauballergie"
                     , Html.Attributes.selected (data.firstNAME == "Stauballergie") ]
-                    [ Html.text "Hausstaubmilbenallergie" ]
+                    [ Html.text "Stauballergie" ]
                 , Html.option
                     [ Html.Attributes.value "Luftverschmutzung"
                     , Html.Attributes.selected (data.firstNAME == "Luftverschmutzung") ]
@@ -528,7 +529,7 @@ nav data = Html.nav
                 [ Html.option
                     [ Html.Attributes.value "Rauchen"
                     , Html.Attributes.selected (data.firstNAME == "Rauchen") ]
-                    [ Html.text "Tabakrauchen" ]
+                    [ Html.text "Rauchen" ]
                 , Html.option
                     [ Html.Attributes.value "Alkoholkonsum"
                     , Html.Attributes.selected (data.firstNAME == "Alkoholkonsum") ]
@@ -558,7 +559,7 @@ nav data = Html.nav
                 [   Html.option
                     [ Html.Attributes.value "Stauballergie"
                     , Html.Attributes.selected (data.firstNAME == "Stauballergie") ]
-                    [ Html.text "Hausstaubmilbenallergie" ]
+                    [ Html.text "Stauballergie" ]
                 , Html.option
                     [ Html.Attributes.value "Luftverschmutzung"
                     , Html.Attributes.selected (data.firstNAME == "Luftverschmutzung") ]
@@ -589,7 +590,7 @@ nav data = Html.nav
                 [ Html.option
                     [ Html.Attributes.value "Rauchen"
                     , Html.Attributes.selected (data.firstNAME == "Rauchen") ]
-                    [ Html.text "Tabakrauchen" ]
+                    [ Html.text "Rauchen" ]
                 , Html.option
                     [ Html.Attributes.value "Alkoholkonsum"
                     , Html.Attributes.selected (data.firstNAME == "Alkoholkonsum") ]
@@ -619,7 +620,7 @@ nav data = Html.nav
                 [   Html.option
                     [ Html.Attributes.value "Stauballergie"
                     , Html.Attributes.selected (data.firstNAME == "Stauballergie") ]
-                    [ Html.text "Hausstaubmilbenallergie" ]
+                    [ Html.text "Stauballergie" ]
                 , Html.option
                     [ Html.Attributes.value "Luftverschmutzung"
                     , Html.Attributes.selected (data.firstNAME == "Luftverschmutzung") ]
@@ -650,7 +651,7 @@ nav data = Html.nav
                 [ Html.option
                     [ Html.Attributes.value "Rauchen"
                     , Html.Attributes.selected (data.firstNAME == "Rauchen") ]
-                    [ Html.text "Tabakrauchen" ]
+                    [ Html.text "Rauchen" ]
                 , Html.option
                     [ Html.Attributes.value "Alkoholkonsum"
                     , Html.Attributes.selected (data.firstNAME == "Alkoholkonsum") ]
@@ -680,7 +681,7 @@ nav data = Html.nav
                 [   Html.option
                     [ Html.Attributes.value "Stauballergie"
                     , Html.Attributes.selected (data.firstNAME == "Stauballergie") ]
-                    [ Html.text "Hausstaubmilbenallergie" ]
+                    [ Html.text "Stauballergie" ]
                 , Html.option
                     [ Html.Attributes.value "Luftverschmutzung"
                     , Html.Attributes.selected (data.firstNAME == "Luftverschmutzung") ]
